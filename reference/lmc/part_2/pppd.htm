@@ -1,0 +1,637 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Get yourself connected</title>
+</head>
+
+<body>
+<b>
+
+<p>
+<font FACE="Arial">Get yourself connected</font></p>
+</b>
+
+<p>
+<font FACE="Arial">Dial-on-demand under Linux is accomplished using a tool called <i>diald</i>, which is
+included with most distributions. If you don&#146;t have it, a good place to find the
+latest versions of many Linux tools is Imperial College&#146;s Sunsite. For the Red Hat
+5.2 system used in preparing this feature, we went to Imperial College's <a
+href="ftp://sunsite.doc.ic.ac.uk">Sunsite</a> and downloaded <i>diald16-0.16.5a-2.i386.rpm</i>
+and its example configuration files <i>diald16-config-0.16.5a-2.i386.rpm</i> from the
+directory <i>/Mirrors/contrib.redhat.com/libc6/i386</i>.</font></p>
+
+<p>
+<font FACE="Arial">Diald works by automating two other programs - the PPP daemon <i>pppd</i>, which
+negotiates the TCP/IP connection, and <i>chat</i>, which executes the ISP&#146;s login
+sequence. So, we need to get these working first. There are several relevant HOWTOs
+(there&#146;s a British <a href="http://einstein.cs.rhbnc.ac.uk/LDP/HOWTO">mirror</a> at
+Royal Holloway College), and we suggest that you start with:</font>
+
+<ul>
+  <li>
+<font FACE="Arial">Modem</font> </li>
+  <li>
+<font FACE="Arial">PPP</font></li>
+  <li>
+<font FACE="Arial">ISP-Hookup</font></li>
+  <li>
+<font FACE="Arial">ISP Connectivity</font></li>
+  <li>
+<font FACE="Arial">IP Masquerading</font></li>
+</ul>
+
+<p>
+<font FACE="Arial">The best place to start, though, is reading the <i>man </i>pages. Try <i>info pppd,
+info chat, info diald</i> and <i>info diald-examples</i>. These even include example
+configuration files which you can cut and paste out.</font></p>
+
+<p>
+<font FACE="Arial">The first step is locating where the modem is connected. If you&#146;re lucky, the
+setup program will have created a link for you as <i>/dev/modem</i>, but if not, simply
+use its COM port number: COM1 becomes <i>/dev/ttyS0</i> and COM2 <i>/dev/ttyS1</i>, and so
+on. If you don't know which port, use a terminal program such as <i>minicom</i> and select
+each port in turn until you get a response when you type <i>AT&lt;Return&gt;. </i>Once you
+know the port, you can move onto entering the details of your connection.</font> </p>
+
+<p>
+<font FACE="Arial">Generally, pppd reads its settings from <i>/etc/ppp/options</i>, and the login script
+is kept in <i>/etc/ppp/chat.config</i>. The files&#146; names and locations may vary
+slightly between distributions and versions; if you can&#146;t find them, search with <i>find
+/ -name options </i>(or <i>chat</i>).</font></p>
+
+<p>
+<font FACE="Arial">Here&#146;s a working sample <i>options</i> file (lines beginning with a hash are
+comments):</font><font FACE="Courier New"></p>
+</font><div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">#Let it know we are talking to a modem</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">modem</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#Where is the modem, and how fast do we talk to it</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/dev/modem 57600</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># How to talk to modem so we don't lose data</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">crtscts</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Produce diagnostic information (remove when it all works)</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">debug</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># And for after we have logged in.</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Use standard masking factor</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">netmask 255.255.255.0</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">defaultroute</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+The <i>chat.config </i>file has two parts: first, a list of strings to listen for which
+signify a connect failure, and second, a set of &quot;expect/send&quot; pairs which are
+the connect dialogue. Here&#146;s an example configured for CIX Internet:</font><font
+FACE="Courier New"></p>
+</font><div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">ABORT BUSY</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">ABORT 'NO DIALTONE'</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">ABORT 'NO CARRIER'</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">&quot;&quot; \d</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">&quot;&quot; AT\p</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">OK \pATDT08453555222</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">CONNECT \p\p</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">sername: lproven</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">assword: mypassword\q</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">luster&gt; &quot;ppp default&quot;</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Unfortunately, we can&#146;t put comments in this one, but it breaks down as follows.
+The first three lines are modem failure strings. The lines that follow mean:</font>
+
+<ol START="4">
+  <ol>
+    <li><font FACE="Arial">
+
+Wait, then send a carriage return (&quot;\d&quot;)</font></li>
+    <li><font face="Arial">Wait, then send &quot;AT&quot; and pause for a second</font></li>
+    <li><font FACE="Arial">Wait for &quot;OK&quot;, then pause for a second and send the dial command (change this
+      number to the one for your ISP)</font></li>
+    <li><font FACE="Arial">Listen for &quot;CONNECT&quot; , then pause for two seconds</font></li>
+    <li><font FACE="Arial">Listen for &quot;sername:&quot; (omitting the first letter should match
+      &quot;Username:&quot;, &quot;username:&quot;, &quot;Please enter your username:&quot; or
+      whatever), then send our ID (change this to match your details)</font></li>
+    <li><font FACE="Arial">Listen for &quot;assword:&quot;, then send our password (change this appropriately, too;
+      the magic string &quot;\q&quot; on the end ensures that it isn&#146;t stored in the
+      debugging information we asked for in the &quot;-v&quot; option.)</font></li>
+    <li><font FACE="Arial">Listen for &quot;luster&gt;&quot;, then send the command to start a ppp connection</font> </li>
+  </ol>
+</ol>
+
+<p><font FACE="Arial">Normally, the chat command is placed in the pppd <i>options</i> file, just before the <i>debug</i>
+line. However, as <i>diald</i> runs the chat script itself, we&#146;ve removed this from
+its normal position, and instead, to test the connection, we pass it to <i>pppd </i>from
+the command line:</font></p>
+
+<p><font face="Courier New">pppd connect &quot;chat -v -f /etc/ppp/chat.config&quot;</font></p>
+
+<p><font FACE="Arial">(Note that as the <i>chat</i> command contains spaces, we&#146;ve surrounded it with
+double quotes.) You can trace the progress of the connection by examining the system log,
+usually found in the /var/log directory. Red Hat 5.2&#146;s is called <i>messages</i>.
+(You can find out what name your distribution uses by inspecting /etc/syslog.conf.) To get
+a scrolling display of the last few lines, use <i>tail -f messages</i>; it&#146;s a good
+idea to have this permanently displayed in another window. If you are not running a GUI on
+your machine, then you can either switch to another virtual console with Alt-F2, or telnet
+into your machine from another on the network.</font></p>
+
+<p><font FACE="Arial">Unlike most daemons, pppd only runs when you need it, so to drop the line, stop its
+process. The basic way to do this is to determine the process identifier (in the PID
+column in the output of <i>ps ax | more</i>) and type <i>kill</i> followed by that number.
+Alternatively, the command <i>killall</i> stops processes by name.</font></p>
+
+<p><font FACE="Arial">To monitor what pppd is doing, look at the network interfaces and routes that are
+present. In normal operation, a Linux machine with a single Ethernet card has two network
+interfaces - one for the Ethernet card (eth0) and one for the internal
+&quot;loopback&quot; network (lo). You can check what interfaces are available using the <i>ifconfig</i>
+command, which should give something like this:</font><font FACE="Courier New" SIZE="1"></p>
+</font><div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">lo </font></td>
+    <td><font FACE="Courier New"> Link encap:Local&nbsp; Loopback</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">inet addr:127.0.0.1 Bcast:127.255.255.255 Mask:255.0.0.0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">UP BROADCAST LOOPBACK RUNNING MTU:3584 Metric:1</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">RX packets:453 errors:0 dropped:0 overruns:0 frame:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">TX packets:453 errors:0 dropped:0 overruns:0
+    carrier:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">collisions:0 </font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">eth0&nbsp; </font></td>
+    <td><font FACE="Courier New"> Link encap:Ethernet HWaddr 00:C0:A8:08:0F:56 </font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">inet addr:10.0.0.60 Bcast:10.0.0.255
+    Mask:255.255.255.0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">RX packets:9108 errors:0 dropped:0 overruns:0
+    frame:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">TX packets:7694 errors:0 dropped:0 overruns:0
+    carrier:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">collisions:0 </font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">Interrupt:12 Base address:0x300 </font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">sl0&nbsp; </font></td>
+    <td><font FACE="Courier New"> Link encap:Serial Line IP </font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">inet addr:10.0.0.254 P-t-P:10.0.0.253 Mask:255.0.0.0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">UP POINTOPOINT RUNNING MTU:1500 Metric:1</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">RX packets:0 errors:0 dropped:0 overruns:0 frame:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">TX packets:636 errors:0 dropped:0 overruns:0
+    carrier:0</font></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><font FACE="Courier New">collisions:0 </font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+There&#146;s also (at least) one route set through each interface - to list routes, use
+<i>route -n</i>. (These commands are usually found in the /sbin directory; if you get a
+&quot;command not found&quot; error, try prefixing the command with the path):</font><font
+FACE="Courier New" SIZE="1"></p>
+</font><div align="left">
+
+<table border="0" height="126">
+  <tr>
+    <td height="21"><font FACE="Courier New">Kernel IP routing table</font></td>
+    <td height="21"></td>
+    <td height="21"></td>
+    <td height="21"></td>
+    <td height="21"></td>
+    <td height="21"></td>
+    <td height="21" align="right"></td>
+    <td height="21"></td>
+  </tr>
+  <tr>
+    <td height="20"><font FACE="Courier New">Destination&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New"> Gateway&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New"> Genmask&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New"> Flags&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New"> Metric&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New"> Ref&nbsp;</font></td>
+    <td height="20" align="right"><font FACE="Courier New"> Use&nbsp;</font></td>
+    <td height="20"><font FACE="Courier New">
+    Iface</font></td>
+  </tr>
+  <tr>
+    <td height="21"><font FACE="Courier New">10.0.0.253</font></td>
+    <td height="21"><font FACE="Courier New"> 0.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> 255.255.255.255</font></td>
+    <td height="21"><font FACE="Courier New"> UH&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 1&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="21" align="right"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New">&nbsp;&nbsp; sl0</font></td>
+  </tr>
+  <tr>
+    <td height="1"><font FACE="Courier New">10.0.0.0</font></td>
+    <td height="1"><font FACE="Courier New"> 0.0.0.0</font></td>
+    <td height="1"><font FACE="Courier New"> 255.255.255.0</font></td>
+    <td height="1"><font FACE="Courier New"> U&nbsp;</font></td>
+    <td height="1"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="1"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="1" align="right"><font FACE="Courier New"> 31&nbsp;</font></td>
+    <td height="1"><font FACE="Courier New">&nbsp;&nbsp; eth0</font></td>
+  </tr>
+  <tr>
+    <td height="21"><font FACE="Courier New">127.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> 0.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> 255.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> U&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="21" align="right"><font FACE="Courier New"> 19&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New">&nbsp;&nbsp; lo</font></td>
+  </tr>
+  <tr>
+    <td height="21"><font FACE="Courier New">0.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> 0.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> 0.0.0.0</font></td>
+    <td height="21"><font FACE="Courier New"> U&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 1&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New"> 0&nbsp;</font></td>
+    <td height="21" align="right"><font FACE="Courier New"> 59&nbsp;</font></td>
+    <td height="21"><font FACE="Courier New">&nbsp;&nbsp; sl0</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+When the pppd link is active, you will see an additional interface <i>ppp0</i> and a
+route configured through it. At this point, there is no name server, so to test the link,
+try pinging a machine at your ISP by its IP address. Once you have pppd working, you can
+automate it with <i>diald</i>.</font></p>
+
+<p><font FACE="Arial">
+
+Diald works by creating a dummy Internet connection using SLIP (an alternative to PPP),
+setting it as the default route for any machines not on the local network, and monitoring
+its activity. Any attempt to access the Internet (or any other external network, such as a
+WAN) uses this dummy connection, at which point diald triggers pppd to connect. It
+continues to monitor the line&#146;s usage, and if it is idle for a certain amount of
+time, it drops the connection again.</font></p>
+
+<p><font FACE="Arial">
+
+Diald reads its configuration from a file called /etc/diald.conf. Most distributions
+include a sample file - for example, Caldera&#146;s is called <i>/usr/lib/diald/diald.conf.sample</i>
+- and an example is included in the <i>diald-examples</i> man page, which also includes
+details of all the parameters. Again, here&#146;s our working example:</font><font
+FACE="Courier New" SIZE="1"></p>
+</font><div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New"># </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># diald.conf for flick</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Select the demand dial rules you want</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Bring the link up for anything, timeout in
+    seconds. Use this for </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># when the computer has its own phone line</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">accept any 420 any</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Use the filter file that comes with diald. This
+    can be a bit drastic, </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># so use the filter below</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">include /usr/lib/diald/standard.filter</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># or use the filter that brings the link up for use
+    on a line shared with</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># a phone</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># include /etc/diald/phone.filter</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># stuff to set up the diald connection</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">device /dev/modem</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">speed 57600</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">lock</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">mode ppp</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># We may get another terminal server, thus use</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># 'dynamic' and do not tell PPP the IP number of the
+    other end</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># For use with gated, comment out the 'dynamic'
+    option, and</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># set remote to be the same as local</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">dynamic</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">local 10.0.0.254</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">remote 10.0.0.253</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">pppd-options name flickppp :</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Delay sending packets for 5 seconds after PPP
+    device opens - </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># this allows routes to be established back to the
+    appropriate dialup server.</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">up-delay 5</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">defaultroute</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">modem</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">crtscts</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">connect &quot;/usr/sbin/chat -f /etc/ppp/chat.config&quot;</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">redial-timeout 10</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">fifo /etc/diald/diald.ctl</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># restrict 9:00:00 17:45:00 1 * *</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># or-restrict 9:00:00 17:45:00 2 * *</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># or-restrict 9:00:00 17:45:00 3 * *</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># or-restrict 9:00:00 17:45:00 4 * *</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># or-restrict 9:00:00 17:45:00 5 * *</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># up</font></td>
+  </tr>
+</table>
+</div><font FACE="Arial">
+
+<p>&nbsp;</font></p>
+
+<p><font FACE="Arial">Try to modify as little as possible of the provided file. We had to make a few changes:
+uncommenting the &quot;standard filter&quot; and &quot;lock&quot; lines, setting the
+speed, and picking appropriate local and remote addresses and a netmask. Use addresses
+that don&#146;t exist on your local network, but as they are dummies, the actual values
+don&#146;t really matter. If your example file contains a &quot;name&quot; option, you can
+probably ignore it; this refers to PAP/CHAP authentication, which few ISPs use.</font></p>
+
+<p><font FACE="Arial">Once you have edited the file appropriately, start the daemon by typing <i>diald</i>.
+You should be able to see diald announcing itself in the system log. To check that
+it&#146;s running, use <i>ifconfig </i>and <i>route -n</i> as before. You can distinguish
+diald&#146;s SLIP interface from the PPP one by its name: instead of pppd&#146;s <i>ppp0</i>,
+diald&#146;s is called <i>sl0</i>.</font></p>
+
+<p><font FACE="Arial">To test it, trying pinging the address of a machine at your ISP, such as one of the
+name servers. As soon as you press <i>Return</i>, you should see a message appear in the
+system log as diald starts a <i>pppd</i> connection. Unfortunately, as analogue modems
+take several seconds or more to connect, the first packet often gets lost. If the
+connection comes up but the ping command just hangs, abort it with Ctrl-C and try again.
+You should find that the second try works.</font></p>
+
+<p><font FACE="Arial">Once the connection&#146;s working, the next step is getting data moving from your
+network through your Linux machine to the Internet. This is done by a technique called <i>IP
+forwarding </i>- although Linux does provide a routing daemon (<i>routed</i>), it&#146;s
+not needed. IP forwarding has been a function of the Linux kernel since version 1.3, but
+not all distributions ship with it by default, and since kernel 2.0.34, it&#146;s been
+turned off by default.</font></p>
+
+<p><font FACE="Arial">IP forwarding is controlled under 2.0.x kernels with the <i>ipfwadm</i> command, which
+configures IP forwarding itself, as well as IP masquerading (which hides the IP addresses
+of machines on the local network from the outside world) and IP firewalling (which blocks
+certain TCP/IP ports). It&#146;s a large and complex subject, but here&#146;s a basic
+script which will turn forwarding on and hide your LAN from the rest of the world:</font><font
+FACE="Courier New"></p>
+</font><div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">#!/bin/sh</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Enable IP Forwarding if it's off (default in 2.0.34+)</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">echo &quot;1&quot; &gt; /proc/sys/net/ipv4/ip_forward</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Set up basic masquerading rules</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -I -p accept</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -I -f</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -O -p accept</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -O -f</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -F -p deny</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -F -f</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/sbin/ipfwadm -F -a m -S 10.0.0.0/24 -D 0.0.0.0/0</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Save it as /etc/ppp/ipfw and set it to be executable with &quot;<i>chmod 667 ipfw</i>&quot;.
+To have it run every time your PPP connection opens, include a line reading &quot;.
+/etc/ppp/ipfw&quot; in /etc/ppp/ip-up.local, which is automatically run every time the PPP
+line comes up. This is also the place to insert your email transfer programs - usually <i>sendmail</i>
+and <i>fetchmail</i>. Here&#146;s mine:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">echo 'Starting IP link...'</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">. /etc/ipfw</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">fetchmail -v</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">sendmail -q</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+See, that didn't hurt, did it? Good luck and happy surfing!</font></p>
+
+<p><font FACE="Arial">
+
+<i>
+
+- <a href="http://www.quatermass.co.uk"> Martin Poole</a> and Liam Proven</i></font></p>
+</body>
+</html>

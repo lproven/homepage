@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>Dr. Solomon's Anti-Virus Toolkit for Windows 95</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body>
+<h1><font size=5>Dr. Solomon's Anti-Virus Toolkit for 
+Windows 95</font></h1>
+<hr>
+<h3><font size=3>Description: suite of virus detection, protection and removal utilities 
+for MS-DOS and Windows 95 </font></h3>
+<h3><font size=3>System requirements: Windows 95</font></h3>
+<h3><font size=3>Price: &#163;125 (ex VAT)</font></h3>
+<h3><font size=3>Availability: now; updates are available monthly or quarterly direct 
+from S&amp;S, and from CompuServe, their Web site and BBS. </font></h3>
+<h3><font size=3>Contact:</font></h3>
+<ul>
+<li><font size=2>Tel: +44(0)1296 318700 </font></li>
+<li><font size=2>Fax: +44(0)1296 318800 </font></li>
+<li><font size=2>BBS: +44(0)1296 318810 </font></li>
+<li><font size=2>WWW: http://www.sands.com/ </font></li>
+<li><font size=2>CIS: DRSOLOMON forum </font></li>
+</ul>
+<h3><font size=3>Verdict: Although the Windows 95 version is still a little raw in 
+places, this remains the definitive PC antivirus package. Essential 
+for anyone who values their data, although like any antivirus 
+software, it's best coupled with at least one other totally-different 
+package to cover all the bases.</font></h3>
+<h3><font size=3>Features: 5/6</font></h3>
+<h3><font size=3>Ease of use: 5/6</font></h3>
+<h3><font size=3>Value for money: 6/6</font></h3>
+<h3><font size=3>Overall: 5/6</font></h3>
+<hr>
+<p>This is the new Windows 95-compatible version of S&amp;S' virus protection 
+package. Along with simple scanners, which search a PC's drives for 
+infection, the main other type of anti-virus package are resident &quot;guardians&quot; 
+that attempt to protect the PC from infection by running in the background, 
+checking disks and programs as they are used. Windows 95 has problems 
+with these: the way that they monitor the PC's activity is by &quot;trapping&quot; the 
+DOS disk-access call, allowing them to check all files for infection as they 
+are read or written. This conflicts with Windows 95's 32-bit disk access 
+routines, forcing Windows into &quot;MS-DOS compatibility mode&quot; and crippling 
+its performance. For some people, protection from viruses is more 
+important than performance and this is tolerable, but most would probably 
+prefer to take a chance than slow their PCs down. This is compelling 
+anti-virus application vendors to produce new versions that will work with 
+95.</p>
+<p>S&amp;S International are one of the first companies to come up with a proper 
+Windows 95 anti-virus suite. As it complements the other Windows 
+versions, for 3.x and NT, S&amp;S has chosen not to give it a new release 
+number; it's flagged as version 7.54. The main changes are that all the 
+Windows components are fully 32-bit, the suite now understands long 
+filenames, and there's a new version of WinGuard rewritten as a Windows 
+Virtual Device Driver (VXD), so that it doesn't force Windows into DOS 
+Compatibility mode. There's no need for a simple utility like this to support 
+advanced Windows 95 features such as OLE, but sadly it lacks other 95 
+niceties such as drag and drop, and it can't be uninstalled from the Windows 
+Control Panel.</p>
+<p>The Windows version of the Toolkit has always included a copy of the 
+DOS version - this doesn't waste much room because they use the same 
+core database files. Although there a few Windows-specific ones, most PC 
+viruses are DOS programs, which work at a very low level, close to the 
+machine's hardware - such as the common Parity.b virus, which fakes faulty 
+SIMMs. The best way of catching them is therefore a DOS program which 
+can work at a similar level. The AVTK includes DOS utilities to search for 
+and remove viruses from both files and disks, as well as a resident 
+&quot;guardian&quot; which sits in the background. In the Windows 3 toolkit, the 
+Windows scanner called this DOS program and wouldn't work without it, 
+but the Windows 95 version is independent and will work without the DOS 
+component, although it provides a valuable extra measure of protection 
+while the system is booting-up - one of its most vulnerable times.</p>
+<p><img src="images/toolkit.gif" align=bottom width=398 height=272></p>
+<p><b><i>The Toolkit's main screen provides a simple way to check multiple 
+drives in one go</i></b></p>
+<p>There are several Windows components in the AVTK, including a scheduler 
+and Virus Encyclopaedia. However, the main ones are the front-end to the 
+scanner and the background monitor, WinGuard. As WinGuard is a VXD, 
+it won't work under Windows NT, Windows 3 or OS/2 - it just pops up a 
+message announcing that it only runs under 95. With this operating system, it 
+sits on the task bar, quietly watching over your shoulder as you work. 
+Unlike the Macintosh or Amiga, the PC has no way of checking when a 
+floppy disk has been inserted, so WinGuard only springs into action when a 
+diskette is first accessed. In testing, it found the AntiExe virus immediately 
+and prevented further access to the disk. Its other function is to monitor 
+programs as they are loading, and warn the user when a virus-infected file is 
+run. The installation program tries to add WinGuard to the RUN= line in 
+WIN.INI, which works fine under 95 but creates a Registry entry under 
+NT, which took some time to find - for the curious, it's 
+HKEY_CURRENT_USER:Software/Microsoft/Windows 
+NT/CurrentVersion/Windows:run. With WinGuard active, programs take 
+slightly longer to load as they are scanned, but general operation isn't 
+measurably slower.</p>
+<p>The other main Windows component is the scanner, FindVirus; it's regularly 
+updated, and this latest version not only adds some new viruses to the list 
+but also adds the ability to scan inside Microsoft Word files for the new 
+macro viruses - a useful addition, but it has the serious drawback of causing 
+FindVirus to crash if it tries to scan a Word file that was 
+password-protected using Word's security option. S&amp;S are aware of the 
+problem, though, and it should be fixed by the time you read this. At 
+present, by default it only scans files with the extension .DOC or .DOT, so a 
+file by a different name won't get scanned, but there is an option to scan all 
+files, regardless of type or name.</p>
+<p><img src="images/findviru.gif" align=bottom width=466 height=377></p>
+<p><b><i>The scanner's warning could almost be designed not to alarm you</i></b></p>
+<p>The program that carries the Toolkit name is a front-end to the virus scanner 
+and repair utilities. Basically unchanged from the Windows 3 release, it 
+allows you to check memory, local and network drives for infection, as well 
+as removing viruses. It also has low-level editors for both binary files and 
+physical disks, for the expert who is either fearless or truly desperate. 
+Accessible either from here or its own Start menu entry is the Virus 
+Encyclopaedia, which is a very basic reference to all the different strains that 
+S&amp;S knows about; it doesn't cover the history of each virus, merely the 
+essential technical details of what it does. Once you are sure your system is 
+clean, clicking &quot;Check for changes&quot; runs ViVerify, which generates 
+checksums for all of your executable program files; after this, ViVerify can 
+watch out for any alterations to them, a common sign of infection. This 
+allows the AVTK to detect viruses that aren't in its database, or that are 
+self-modifying and therefore hard to detect. It might be better if the ViVerify 
+program was run automatically to generate the checksums when the 
+package was installed, as FindVirus is, and if checking for changes was 
+integrated into FindVirus itself, but the current system is quite usable.</p>
+<p><img src="images/encyclop.gif" align=bottom width=420 height=384></p>
+<p><b><i>The Virus Encyclopaedia isn't verbose, but it tells you what you 
+most need to know</i></b></p>
+<p>The components of the Toolkit aren't quite as smoothly integrated with each 
+other and the OS as they should be, but the AVTK's good at what it does 
+and provides all the tools you need to keep your machine safe - or fix it 
+when the disaster has already happened. This new Windows 95 release 
+inherits a few of the Windows 3 version's minor irritations, but remains the 
+best there is.</p>
+</body>
+
+</html>

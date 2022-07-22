@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Feature connectors box</title>
+</head>
+
+<body>
+
+<h1><font size="5">Everything you ever wanted to know about
+feature connectors but were afraid to ask</font></h1>
+
+<p><font size="4"><em>Feature box-out</em></font></p>
+
+<hr>
+
+<p>A graphics card essentially comprises two functional units: a
+frame buffer, the area of video memory in which the screen image
+is drawn, and the graphics chip which builds up that image from
+the commands sent by the operating system to draw letters and
+shapes and painting bitmaps. This is no help if you want to show
+a moving TV image: video has different requirements, such as
+conversion from TV's YUV (luminance/chrominance) colour model to
+computers' RGB (red:green:blue) and resizing a video image on the
+fly. These can be done in software if the PC's CPU is fast
+enough, but they're best handled by separate hardware. Since this
+costs extra, it's not usually built-in, but located on an
+optional separate card. As this has to be displayed on the same
+screen, the video image must be passed through to the main
+graphics card's frame buffer, bypassing the graphics circuitry -
+the function of the feature connector. </p>
+
+<p>The original feature connector was part of IBM's VGA
+specification, and so is limited to the capabilities of the VGA
+display: an image of either 320x200 pixels in 256 colours or
+640x480 in 16, at a refresh rate of 60MHz. Although many SuperVGA
+adaptors have this connector, it's never been very popular,
+partly because the 286 and 386-based PCs of the late 80s lacked
+the bandwidth or storage to handle video. In today's world of
+100+MHz Pentium-class processors, handling video streams is
+becoming viable, but the VGA feature connector can't cope. </p>
+
+<p>Many of the enhancements of modern video cards are derived
+from standards set by the Video Electronics Standards Authority,
+VESA. One of these is VAFC: the VESA Advanced Feature Connector.
+This increases the speed, bus width and capabilities of the old
+design, allowing true-colour images at high refresh rates.
+However, both this and its predecessor have the same limitation:
+the video board has to produce the TV picture independently of
+the graphics card and then hand the result over for display. This
+means that the video board has to have its own memory, as well as
+that on the graphics card - duplicating one of the most expensive
+components in the system, and so making the upgrade comparatively
+expensive. Also, a modern system has to produce high- can
+true-colour displays, which requires a RAMDAC - and in a VAFC
+system, both the graphics accelerator and the video decoder must
+access this component, necessitating an expensive dual-ported
+RAMDAC. </p>
+
+<p>Despite its limitations, the VAFC approach works, and it
+requires minimal changes to the design of the main graphics card,
+instead transferring the cost to the daughterboard. Several of
+the cards in this Labs include a VAFC, or S3's proprietary
+&quot;Scenic Highway&quot; local peripheral bus, which is a
+superset of the VAFC. Scenic Highway allows a simple MPEG-1
+decoder and/or video digitiser to be connected to a card based on
+certain S3 chipsets (such as the Trio64V+ or 968). These boards
+just perform the digitisation or decoding: the graphics card does
+the rest of the work, converting YUV to RGB and scaling the video
+image.</p>
+
+<p>The VGA/VESA method allows a cheap and simple way of
+connecting just one video device to a graphics card, which can
+put a single video image on-screen. For applications where this
+is insufficient, such as videconferencing with its several
+independent video images, there is the VESA Media Channel (VMC).
+VMC provides a separate, high-speed bus allowing up to 7 devices
+to exchange uncompressed video data independently of the system
+bus, using a single frame buffer. However, the extra cost of a
+VMC interface means that it's mainly used in high-end cards such
+as VideoLogic's GraphicStar 700. </p>
+
+<p>In time, increases in CPU power and bus bandwidth will
+probably mean that video handling is performed by the CPU, and
+Intel already claim that the capacity of the PCI bus makes
+separate video buses unneccesary. It may already be too late for
+anything else to get a grip.</p>
+</body>
+</html>

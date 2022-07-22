@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Minimal NT machines</title>
+</head>
+
+<body>
+
+<h1><font size="5">NT on a shoestring</font></h1>
+
+<p><font size="4"><em>NT Workstations Labs box-out</em></font></p>
+
+<hr>
+
+<p>We'd all like to have £4,000 spare to buy one of the machines
+described in this labs - even if it wasn't to spend on a PC!
+However, if you can't afford one of these unashamedly high-end
+machines, but still fancy running NT, here - in order of
+importance - is a checklist of what you might need...</p>
+
+<p>Memory: this is absolutely the most important factor. NT will
+boot in 8Mb, but it's too slow to use in this little RAM. 16Mb
+will give you a somewhat sluggish but usable workstation -
+similar to Windows 3.x in 8Mb. 24Mb will be reasonably responsive
+for normal desktop use, with a couple of programs open at all
+times. 32Mb is ideal, if money is no object - the reason we've
+specified 32Mb of RAM is that on a Pentium machine, where SIMMs
+must be added in pairs, it makes more sense to go for two 16Mb
+SIMMs and retain 2 empty SIMM slots for future expansion than to
+go for two 8Mb and two 4Mb ones (giving 24Mb) - which would fill
+all four slots.</p>
+
+<p>Processor: this really isn't as important as you might think.
+NT requires a 386-class CPU, but apart from that it's not too
+fussy. A 386 will work, very slowly - there are a few patient
+souls out there running 386sx NT fileservers which are actually
+usable as fileservers, but you wouldn't enjoy using one as a
+workstation - but a 486DX2 is fine, with enough memory. As
+always, though, the faster, the better.</p>
+
+<p>Hard disk: there are still some compatibility problems with
+EIDE hard disks and non-DOS operating systems such as NT, OS/2
+and UNIX. Older IDE drives are OK as long as they don't exceed
+the IDE specification's maximum size of 512Mb - but that's quite
+small when buying a drive today. For this reason, we specified
+SCSI drives, which cost a little more, but are worth it in terms
+of effort saved. </p>
+
+<p>When it comes to space, NT is comparable to Windows 3 -
+reserving 40Mb or so for the swapfile, you'll need an absolute
+minimum of 40Mb to install at all, but a standard installation
+will take more like 70Mb, - you could just about squeeze it onto
+a 120Mb drive, but without any space for applications. To get the
+benefits of NTFS, it's best to partition the disk - leave a small
+partition for DOS (10Mb will do, but more if you have the room)
+and install NT into its own partition, which is formatted to
+NTFS. If you still want to run Windows 3 (or 95) as well, it's
+best to split the disk in half - keep the DOS FAT partition under
+512Mb to avoid wasteful 16Kb clusters, and put NT in what's left.</p>
+
+<p>Amost any graphics card will work with NT, but some only in
+VGA mode - you must check with the supplier. The only sound cards
+directly supported by v3.5 are SoundBlaster, MediaVision and the
+Windows Sound System - but ask the supplier, as some have written
+their own drivers. Most standard network cards are fine, and
+recent ones usually have NT drivers with them anyway. For
+anything, though, if you're buying it for the purpose, choose
+from Microsoft's Hardware Compatibility List wherever possible;
+failing that, make sure the supplier can provide drivers, and if
+at all possible, try before you buy.</p>
+</body>
+</html>

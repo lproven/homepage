@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>Why NoT?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body>
+<h1><font size=5>Third Opinion: What's still &quot;Not There&quot;?</font></h1>
+<hr>
+<p>NT 4 is a remarkable piece of software, but it is not the be-all and end-all of 
+operating systems. Far from it. It's not even everything MS had promised it 
+would be. The biggest thing that NT 4 is not is Cairo, the all-new 
+object-oriented NT that MS has been talking about for years. Instead, the 
+current product has had a facelift and a tummy tuck.</p>
+<p>It has a neat user interface, sure - but it isn't the Cairo shell, it's the 
+simplified, cut-down Windows 95 Explorer ported back onto NT. The 
+&quot;Desktop&quot; is just a directory under C:\WINNT, and shortcuts are .LNK 
+files instead of proper symbolic links in the filesystem. </p>
+<p>Moving the graphical windowing system (the Graphics Device Interface, or 
+GDI) into the kernel has required a substantial rewrite, which will almost 
+certainly introduce new bugs that will take time to find and fix. Also, it needs 
+completely new graphics card drivers, and they too will have bugs.</p>
+<p>Finally, this goes completely counter to current thinking in operating system 
+design circles, which today favours &quot;microkernel&quot; systems, in which the core 
+of the whole operating system is kept as small and simple as possible and all 
+the supporting functionality is moved out into independent subsystems. This 
+yields a more portable, flexible design, which is theoretically more robust, as 
+it makes the critical kernel less vulnerable to problems in the rest of the 
+system. Microsoft has long claimed - very dubiously - that NT is an MK 
+system, but now this looks even more ridiculous than before.</p>
+<p>Backwards-compatibility was never the primary objective for NT, but this 
+has been further reduced. NT is at heart a development of OS/2, and has 
+always supported OS/2 text-mode programs and OS/2 HPFS-formatted 
+disks. MS even had a working Presentation Manager subsystem for running 
+16-bit OS/2 graphical applications, but never officially released it. Now that 
+MS no longer has any OS/2 applications in its portfolio, it looks like OS/2 
+support will be dropped from NT - HPFS is probably just the first to go.</p>
+<p>On the network front, NT 4 Server still relies on the tired old domain system 
+- there are no distributed directory services. Exchange was meant to use the 
+Cairo unified Object Filing System, but as the OFS isn't in NT4, Exchange 
+Server remains a separate product - for now. The Internet Information 
+Server functionality is built-in, but the Catapult Internet proxy server wasn't 
+ready in time.</p>
+<p>Version 4 is the biggest upgrade NT has ever had, but it's still a 
+comparatively minor step forwards, and the purity of its design has been 
+compromised for improved performance. There's no easy way to upgrade a 
+Windows 95 system, and interoperating with OS/2 is harder than ever. It's 
+very tempting to desktop workstation users, but not as much so to network 
+administrators. Certainly, no sensible SysAdm would dream of rolling it out 
+onto their servers, at least not until the first Service Pack is released - if then.</p>
+<p>8/10, Gates. Good try, but could do better.</p>
+</body>
+
+</html>

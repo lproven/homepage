@@ -1,0 +1,655 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Linux Masterclass - part 1</title>
+</head>
+
+<body>
+<b><i>
+
+<h1></i>Linux Masterclass part 1</h1>
+
+<p>&nbsp;</p>
+
+<h2>Contents</h2>
+
+<ol>
+  <li><h3><a href="#sec1">Introduction</a></b></h3>
+    <b></li>
+  <li><h3><a href="#sec2">What </b><em><strong>is</strong></em><b> Linux?</b></a></h3>
+    <b></li>
+  <li><h3><a href="#sec3">Distributions</a></b></h3>
+    <b></li>
+  <li><h3><a href="#sec5">Set-up</a></h3>
+  </li>
+  <li><h3><a href="#sec6">Putting it to work</a></h3>
+  </li>
+</ol>
+
+<p>Also see: </p>
+
+<blockquote>
+  <h3><a href="in2unix.htm">A brief guide to UNIX</a></h3>
+</blockquote>
+
+<p><i>&nbsp;</p>
+</i></b>
+
+<h2><a name="sec1">Introduction</a></h2>
+
+<p>To defend itself against the US Department of Justice's charges of unfair trading
+leading to a monopoly, Microsoft Corporation, the wealthiest company in the USA, has cited
+a free, cooperatively developed operating system as evidence that it faces real
+competition.</p>
+<font FACE="Courier New">
+
+<p></font>The OS in question is, of course, Linux, a form of Unix developed in 1991 by a
+student in his spare time. Yet this is the <i>only </i>non-Windows OS in the world
+currently gaining market share. It may only be doing so well <i>because</i> it's free, but
+its future looks bright. It needs no financial justification for its continued
+development, and the continuing growth of the PC industry favours it as much as Microsoft.
+It's especially strong in non-English speaking countries; created by a Swedish-speaking
+Finn, and with all the source code readily available, it internationalises well.</p>
+<font FACE="Courier New">
+
+<p></font>The aim of this article is to help you to install a a working Linux system, get
+it running properly, connected to a network and the Internet, and performing useful work.</p>
+<font FACE="Courier New">
+
+<p></font>Linux is a form of Unix, which has its own names and concepts which long predate
+the PC, DOS and Windows. While I've tried to avoid too much specialist terminology, some
+is inevitable, which I'll explain as we go. </p>
+
+<p><i><b>&nbsp;</p>
+
+<h2><a name="sec2">What <u>is</u> Linux?</a></b></i><font FACE="Courier New"></h2>
+
+<p></font>The operating system called &quot;Linux&quot; is actually a blend of the Linux
+kernel, tools from Richard Stallman's GNU project and various other components.</p>
+<i>
+
+<p>The kernel and GNU</i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>The kernel is the heart of the system, and as well as managing processes, memory
+  and I/O, it contains all the main hardware device drivers. Next comes a layer of programs
+  which provide network services, the command-line interface (or <i>shell</i>) and so on,
+  many of which come from GNU. Many are &quot;daemons&quot;, running in the background and
+  never directly interacting with the user. Their names often end in a &quot;d&quot; to make
+  this apparent - e.g., pppd, the point-to-point protocol daemon, which makes an Internet
+  connection over a modem.<font FACE="Courier New"></p>
+</blockquote>
+</font><i>
+
+<p>The X window system</i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>The next layer comprises the services which provide a graphical user interface.
+  Unix graphics work via a tremendously powerful and flexible protocol called X. It can
+  function over a network, so that a program and its display can be on separate machines;
+  however, for a Linux machine running standalone or on a Windows network, this is academic.<font
+  FACE="Courier New"></p>
+  <p></font>Linux graphics are provided by a program called an X server -usually XFree86,
+  although commercial alternatives such as MetroLink's Metro-X exist. This offers features
+  such as a multiple monitor and OpenGL support, neither of which XFree86 does - yet. The
+  current XFree86 at the time of writing is v3.3.1, and keeping it up to date is necessary
+  to support the latest graphics adaptors. 3D acceleration is possible through a separate
+  program, Mesa, although at present only on 3DFX.<font FACE="Courier New"></p>
+</blockquote>
+</font><i>
+
+<p>The window manager</i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>X simply displays graphics, it doesn't provide paraphernalia such as ways to
+  move and size windows. This is the job of a separate program called a <i>window manager</i>.
+  Traditional window managers do little else, perhaps adding an application menu. As purists
+  regard anything more as frippery, such programs are found in most Linux distributions,
+  including:<ul>
+    <li>fvwm, a basic window manager with support for virtual desktops. [<a
+      href="images/Fvwm.jpg">screenshot</a>]</li>
+    <li>fvwm95, which adds a superficial Windows 95 look and feel, complete with taskbar and
+      Start menu.</li>
+    <li>AfterStep, which emulates the look and feel of the NextStep operating system, with
+      attractively-shaded title bars and menus, plus an icon bar.</li>
+  </ul>
+  <p>If you're coming over from another GUI such as Windows, though, these will rudimentary
+  and unfriendly. Consequently, there's a trend towards more elaborate, complete user
+  interfaces. Today, the most powerful is the <i>K Desktop Environment </i>or KDE, a
+  complete GUI including a file manager, application menu, iconic desktop, task bar and a
+  host of utilities from a text editor to a tool to make Internet connections. [<a
+  href="images/kde_tools.jpg">screenshot</a>] Some people dislike KDE for its somewhat
+  Windows-like look and feel, but if Windows is where your experience lies, this is just
+  what you need!<font FACE="Courier New"></p>
+</blockquote>
+
+<p></font>The main practical consequence of Linux' piecemeal construction is the need to
+keep track of the different components, for instance to update them to support the latest
+hardware, or for greater system stability. As the Linux kernel actually contains most
+device drivers, it's one to watch, as are XFree86 and your chosen desktop environment. </p>
+<font FACE="Courier New">
+
+<p></font>Unlike Microsoft's marketing-created version numbers, Linux version numbers mean
+something. Take the current Linux kernel - at the time of writing, version 2.2.1. The
+first number is the major version, and seldom changes. The second part is the minor
+version, and changes more often. Finally comes the revision level, which can change every
+few months.</p>
+<font FACE="Courier New">
+
+<p></font>Odd-numbered minor versions are development kernels, which are essentially beta
+code and should be avoided. Even-numbered minor versions denote stable code. For some
+years, the stable kernel was version 2.0.<i>n</i>, which got to revision 36. This or
+2.0.35 is still found in most shipping distributions, as 2.2.1 is so new. By the time you
+read this, 2.2.x kernels should be commonplace, with improved SMP performance and RAID
+support amongst many other advances.</p>
+<font FACE="Courier New">
+
+<p></font>Concurrently, there were some 130 revisions of the 2.1.<i>n</i> family of
+development kernels, which became stable version 2.2.0 at the start of January 1999 (Unix
+counting usually starts from 0, not 1). So far, there's been one bug-fix release, thus the
+current 2.2.1. The next development family will be 2.3.<i>n</i>.</p>
+
+<p>&nbsp;</p>
+<i><b>
+
+<h2><a name="sec3">Distributions</a></b></i><font FACE="Courier New"></h2>
+
+<p></font>With the parts of a Linux system being written by many different people or
+groups, assembling a complete system is a complex undertaking. This was the reason for the
+creation of Linux distributions: a person or company assembles their chosen assortment
+from various different sources, tying them together with an installation program,
+configuration files and documentation.</p>
+<font FACE="Courier New">
+
+<p></font>Although there is a profusion of different distributions, they're starting to
+converge as certain tools achieve dominance. Important differences remain, and each has
+unique points of interest, but for the most readily-available assistance and software
+support it's probably best to go with one of the bigger &quot;mainstream&quot;
+distributions. The following are the main competitors.</p>
+<i><b>
+
+<p><a href="http://www.redhat.com">Red Hat</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>The most widely-used distribution; even Linux Torvalds himself runs Red Hat. The
+  biggest name in Linux, the eponymous company has received investments from Netscape and
+  Intel amongst others, leading to concern that Red Hat is becoming &quot;the Microsoft of
+  Linux&quot;. The company has its own development labs, RHAD, whose output is donated back
+  to the Linux community, including the most widely used software installation system, the
+  RedHat Package Manager (rpm). It is also assisting development of the unfinished GNOME
+  user interface. However, the company will not include any proprietary software, so, for
+  instance, although KDE is open source, it uses a toolkit that wasn't, so Red Hat refuse to
+  incorporate it.<font FACE="Courier New"></p>
+</blockquote>
+</font><i><b>
+
+<p><a href="http://www.caldera.com">Caldera</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>Backed by former Novell CEO Ray Noorda, Caldera now owns some former Novell and
+  Digital Research technologies such as DR-DOS and GEM. It's also the main focus of
+  Netware-Linux integration, having donated code to the Linux IPX stack, as well as offering
+  a commercial NDS client and NDS-capable Netware server for Linux. Caldera's distribution
+  is aimed at corporate users and includes commercial elements, so isn't freely
+  distributable, but there's a &quot;Lite&quot; version that is.<font FACE="Courier New"></p>
+</blockquote>
+</font><i><b>
+
+<p><a href="http://www.suse.de">SuSE</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>This German distribution is quickly becoming the most popular in Europe. It's
+  technically advanced, but the English-language version tends to lag behind the German one
+  and it's not as well known or supported by American vendors.</p>
+</blockquote>
+<i><b>
+
+<p><a href="http://www.slackware.com">Slackware</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>Maintained by Patrick Volkerding, Slackware is one of the oldest distributions,
+  and as such, is the only one that can be installed from floppy disks as opposed to CD or
+  over a network. Its age shows in some ways, such as differently-structured configuration
+  files, but this can make it easier to find your way around.</p>
+</blockquote>
+<i><b>
+
+<p><a href="http://www.debian.org">Debian</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>This is a non-commercial distribution produced by a non-profit making collective
+  and comprises mainly GNU software; for instance, it eschews the rpm installation format
+  for its own package system. There's also an experimental version based around the GNU HURD
+  kernel. Probably the least user-friendly Linux, it's best avoided except by experts.</p>
+</blockquote>
+<i><b>
+
+<p><a href="http://www.eit.de">EasyLinux</a></b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>A promising newcomer, this German distribution aims to be the beginners' Linux.
+  Installation is completely graphical, the system boots to a GUI and runs the KDE
+  throughout. At the time of writing, it's still in beta testing, but has great potential.</p>
+</blockquote>
+<i><b>
+
+<p>Others</b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>There are many other distributions, including ones for Macintosh, Amiga, Atari
+  ST, Acorn and most RISC workstations. Some you may encounter include:<ul>
+    <li>Mandrake, a version of Red Hat with integrated KDE.</li>
+    <li>Extreme Linux, another Red Hat variant designed for distributed massively-parallel
+      computing, such as &quot;Beowulf&quot; clusters.</li>
+    <li>TurboLinux (Japanese), LST and DLD (German), Unifix (POSIX-certified), Yggdrasil (now
+      &quot;Plug and Play Linux&quot;). <font FACE="Courier New"></li>
+  </ul>
+</blockquote>
+</font><i><b>
+
+<p>xBSD</b></i><font FACE="Courier New"></p>
+
+<blockquote>
+  <p></font>Another family of open source operating systems, differing from Linux mainly in
+  that they use kernels based on the version of Unix developed at the University of
+  California at Berkeley - the <i>Berkeley System Distribution</i>; examples include NetBSD,
+  FreeBSD and OpenBSD. Their programming teams are closed, whereas anyone who wishes can get
+  involved in working on the Linux kernel - if they're good enough! This has led to
+  considerably more interest in Linux - but the BSD derivatives lead in some areas, for
+  example networking, and are especially well suited to firewalls, web servers and so on,
+  while Linux is equally a desktop client system.<font FACE="Courier New"></p>
+</blockquote>
+</font>
+
+<p><b><i>&nbsp;</p>
+</i>
+
+<h2><a name="sec5">Set-up</a></b></h2>
+
+<p>The easiest and safest way to experiment with Linux is using a dedicated PC. An old
+machine will do: for modest graphical use, a 486DX2 with 16MB RAM and a 500MB drive will
+suffice, while a Pentium/90 or faster with 24MB and 1GB and a CD-ROM will be ideal. Such a
+system can be purchased second-hand for around the same price as a large additional disk
+to hold Linux on your main machine.</p>
+
+<p>If you can't afford a separate computer, some caveats apply: 
+
+<ul>
+  <li>If things go badly wrong during installation, you could lose everything on your PC. Be
+    prepared and back up! <b>As an absolute minimum </b>ensure that you have copies of your
+    main data files and installation disks to reload all important software. Two verified
+    backups are best.</li>
+  <li>Make a DOS boot diskette with working CD-ROM drivers, in case you need to re-install. If
+    the thought of finding and adding these to your startup files is intimidating, you're not
+    ready for Linux!</li>
+  <li>Consider using a dedicated hard disk just for Linux.</li>
+  <li>Don't try to install onto a machine that only runs Windows NT; it's much more
+    complicated.</li>
+  <li>Some modern hardware isn't supported under Linux yet, including DVD drives and USB.</li>
+</ul>
+
+<p>Before you start installing anything, make an inventory of your hardware - Windows 9x
+can provide the details. The installation program will be asking questions later!</p>
+
+<p>You need to know in advance about any devices you want to use under Linux; by the time
+the installer asks, it's too late to go back and look. Furthermore, Linux doesn't properly
+support plug and play, so unless you have hardware that absolutely requires it you should
+disable P&amp;P in the BIOS, then ensure that everything still works under Windows. The
+kernel's autoprobing device search often fails, even when devices are using their default
+settings, so it'll help to know.</p>
+
+<p>Get as much information on each device as possible, even if, with luck, you'll never
+need it. </p>
+
+<p>The basics are make, model and chipset. Generally, even brand-name devices use generic
+third-party chipsets, and Linux will identify them by chipset, not manufacturer's model
+name: for example, &quot;3c509&quot;, not 3Com Etherlink III; &quot;S3 Trio64V+&quot;, not
+&quot;STB Powergraph 64&quot;, and so forth. For all controller cards, such as sound, SCSI
+and network adaptors, you should know the settings: IRQ line, I/O port, DMA channel and
+ROM address. (Not all devices use the last two, but almost everything uses the first
+pair.) You should know whether all disk drives are IDE or SCSI; if IDE, whether master or
+slave, and on primary or secondary channel; if SCSI, the unit number.</p>
+
+<p>Here's a checklist to start from. 
+
+<ul type="circle">
+  <li>Hard disk(s): how many; size in MB; number of heads, cylinders and sectors per track;
+    current partitions and filesystems (FAT16, FAT32, FAT32X or NTFS).<br>
+    Disks aren't identified by letters, but as /dev/hd... (for IDE drives) or /dev/sd... (for
+    SCSI ones). Next comes a letter determining the drive number: /dev/hda is the first IDE
+    drive, for instance, while /dev/sdb is the second SCSI one. Following this is a number
+    identifying the partition. Primary partitions are 1 to 4, an extended partition is 5, and
+    logical drives in the extended partition are 6 up.</li>
+  <li>CD-ROM drive: ATAPI (EIDE-interface) CDs are named as for hard disks, so a secondary
+    master would be /dev/hdc. SCSI CDs are generally /dev/scd0. If an ATAPI CD is the only
+    device on its channel, ensure it's the master.</li>
+  <li>Graphics adaptor: amount of video RAM, supported modes with pixel resolutions, colour
+    depth and refresh rates.</li>
+  <li>Monitor: supported resolutions and <i>both </i>horizontal and vertical scan rates.</li>
+  <li>Sound card: compatibility (for example, SoundBlaster 16, Pro orAWE32.) Linux support for
+    SB-compatibles isn't very good, so if there's another mode, such as Windows Sound System
+    compatibility, this may work better - but its settings will be different!</li>
+  <li>SCSI adaptor: this may include parallel-port and floppy-interface drives such as Zip
+    disks and tape drives.</li>
+  <li>Network card: type of cabling, IP address, subnet mask, gateway and DNS servers.</li>
+</ul>
+
+<p>Other devices will be easier to add later, but beware that many PC peripherals are only
+really intended for use with DOS and Win9x, so are unlikely ever to work, or at least work
+well, with Linux - and configuring them will be difficult. This includes Windows modems,
+GDI printers, and many parallel port devices other than printers. Also, Postscript
+printers are by far the easiest to set up, and other types require considerable additional
+work.</p>
+
+<p><b>Partitioning</b></p>
+
+<p>This is an area that often causes problems. Recent machines usually have a single
+primary FAT32 partition occupying the entire disk. To fit Linux onto the same drive, you
+must replace the single Windows partition with several smaller partitions: one for
+Windows, at least one for Linux, and a Linux swap partition.</p>
+
+<p>The traditional (and safest) way is to back up everything on the drive, wipe it clean,
+and start from scratch. First use DOS to create a FAT partition and restore Windows into
+it, leaving space for Linux. Afterwards, use the Linux tools to install into the empty
+space. If you can't be bothered to reformat and reload, <b>back it up anyway!</p>
+
+<p></b>There are two ways to repartition a machine without reformatting. Supplied with
+most Linux distributions is a tool called FIPS, which will shrink a FAT partition to
+create empty space at the end of the disk into which you can install. Find FIPS on Linux
+CD and study its documentation thoroughly. I've tried it, and it worked well, but
+personally, I prefer the other method: third-party partitioners.</p>
+
+<p>I know of three: PowerQuest PartitionMagic, Symantec PartitionIt, and V Communications'
+Partition Commander. If you are buying one for this purpose, get PartitionMagic 4, as it's
+the only one which can manipulate Linux ext2fs partitions.</p>
+
+<p>Using any of them, you'll be able to resize your FAT partition to leave space for
+Linux. Although a simple system will fit into around 500MB, at least a gigabyte is
+advisable. At this point, the PC way of doing things diverges from traditional Unix
+wisdom. The approved technique is to create separate partitions for the root, /usr and
+/opt filesystems. If it's your first time, though, a single big root filesystem is far
+easier.</p>
+
+<p>As well as these, you must also have a separate swap partition, which the kernel uses
+for virtual memory. A rule of thumb is to allocate twice as much swap space as the machine
+has physical RAM, or up to four times as much if it's short of memory. Note that some
+versions of Linux have a maximum swap partition size of 128MB.</p>
+
+<p>To summarise:</p>
+
+<blockquote>
+  <p>Calculate how big your root filesystem and swap partition will be, and add them
+  together.</p>
+  <p>Under DOS, resize your primary FAT partition to leave this much free space.</p>
+  <p>Under Linux, create a single extended partition occupying all of this free space.</p>
+  <p>Create the root filesystem at the start of the extended partition. It will be
+  automatically set to type 83, the code for Linux filesystems.</p>
+  <p>Create the swap partition to fill the rest of the space, and change its type to 82
+  (Linux swap.)</p>
+</blockquote>
+
+<p><b>Installation</b></p>
+
+<p>Most modern Linux installation programs are friendly, easy and complete with online
+help. One common niggle, though, is the absence of a &quot;back&quot; button to return and
+change answers given earlier, so take it slowly and think your decisions through.</p>
+
+<p>Most installers offer a choice of standard configurations, such as minimal, minimal
+with X, compact, standard and complete systems. It's preferable to start small. Once you
+have a graphical system installed, it's easy to add components, so it's not necessary to
+get everything right first time. Keep it simple at first and add things you need later,
+rather than swamping your filesystem with thousands of packages. Distributions often
+include a great deal of free programs of dubious quality and usefulness.</p>
+
+<p>Two things to include are X (sometimes incorrectly called &quot;X Windows&quot;, and a
+vital part of Linux' GUI) and the C compiler (required to recompile the kernel). Choose
+XFree86 (plus libraries) and GNU `C' and `make' utility, but no other development tools.</p>
+
+<p>Aside from them, use your discretion. Most other optional components are best added
+later. RedHat and derivatives use the GraphicaL INstallation Tool, <em>glint</em>, whereas
+KDE-based distributions such as Caldera and SuSE use <em>Kpackage</em>. If all else fails,
+the <em>rpm</em> command is available.</p>
+
+<p>&nbsp;</p>
+<b><font FACE="Courier New">
+
+<p></font>Networking</b></p>
+
+<p>Include this during installation, as the installation program will perform some of the
+configuration for you. The major categories of tools are: 
+
+<ul>
+  <li>TCP/IP - fundamental to all Linux networking. If your machine will be a client, this is
+    the only protocol you need.</li>
+  <li>NFS - for networking to other Unix computers.</li>
+  <li>Basic internet tools - most of the standard Linux internet tools, such as <i>elm</i>, <i>pine
+    </i>and <i>tin </i>are poor, and should be avoided. Essentials are:<ul type="square">
+      <li>Lynx - the text-mode web browser.</li>
+      <li>An ftp client.</li>
+      <li>Netscape, if it's available.</li>
+      <li>Pppd and kppp (if using KDE) - the basic dial-up networking tools.</li>
+    </ul>
+  </li>
+  <li>Samba - for networking to Windows. Note that some distributions, such as Caldera, treat
+    the Samba mount and unmount utilities as optional extras.</li>
+  <li>Netatalk - this is Appletalk, the Macintosh network protocol. Unnecessary except for
+    servers.</li>
+  <li>IPX, Netware client and Netware server - these Novell tools are unnecessary except for
+    servers, unless you wish to connect to a Novell network.</li>
+</ul>
+
+<p>To network a Linux workstation to Windows or other Unix machines, you must use TCP/IP.
+The simplest way is to add TCP/IP to all workstations, and give each one a unique IP
+address in the form 10.0.0.<i>n</i>. The default network mask will probably be
+255.0.0.0,and as long as it's the same on all machines, you can leave it. To look at
+shared drives on Windows machines, use <i>smbclient</i>; to link to them, use the <i>smbmount</i>
+command. Linux-to-Linux networking uses NFS, which is too complex to go into here.</p>
+
+<p><b>Booting</b></p>
+
+<p>This is often the most problematic area after partitioning. Let's start with a look at
+the PC boot process.</p>
+
+<p>All versions of DOS and Windows can only boot from a primary partition on the first
+hard disk. The normal setup is a single primary partition, set as active, and the BIOS
+boots the computer from that.</p>
+
+<p>Other systems, such as Linux and OS/2 have no such restriction, and can load from any
+partition on any drive that is accessible to the BIOS - which simply means that the
+bootable filesystem must lie within the first 1,024 cylinders of the disk. Note, though,
+that parallel-port devices are not accessible to most BIOSes, so you can't boot from such
+a disk, nor from a SCSI disk on a &quot;dumb&quot; controller (one with no BIOS).</p>
+
+<p>To allow the user to choose what OS to boot, something has to be loaded before the BIOS
+gets as far as the active partition. There's one area that's scanned before this - the
+very first part of the first hard disk, the <i>Master Boot Record.</i> So, a tiny program
+has to be inserted into the MBR to offer a choice.</p>
+
+<p>You can use the Linux loader, Lilo, or a more sophisticated third-party alternative.
+The most capable is V Communications' System Commander; a simpler version is included with
+the same company's Partition Commander, and an basic but pretty equivalent, BootMagic,
+comes with PartitionMagic 4. PartitionMagic 3 includes a licensed copy of IBM's Boot
+Manager, which is very capable but requires a special partition. Full documentation on
+these comes with the respective programs.</p>
+
+<p>The choice comes down to putting Lilo in the MBR, and using it to choose between DOS or
+Linux, or using a third-party alternative and putting Lilo in the boot sector of the Linux
+root filesystem.</p>
+
+<p>When Lilo is booted, it looks for a file called <i>lilo.conf</i> in the /etc directory
+of the root filesystem. (As it can't read the filesystem itself, it stores the location on
+the disk of the file - so if you move or resize the root filesystem, you <i>must </i>re-run
+Lilo so it can store the new position of lilo.conf.) This file contains a list of systems
+that Lilo can boot; typically, the location of your Linux kernel, and a pointer to the
+active primary partition so that you can still boot DOS. Lilo then presents a &quot;lilo:
+&quot; prompt, and expects you to type the name of one of the entries. To see a list of
+valid options, press the tab key, or just press Return to load Linux. If nothing is
+entered, after a few seconds it loads the default entry.</p>
+<b>
+
+<p>Logging-in</b></p>
+
+<p>Once your system is installed and booting, you will meet the first major difference
+between Linux and DOS or Windows. Before you can do anything at all, you must log in.
+Initially, you should log in under the root account, with whatever password you specified
+during setup. To get your system running and all your applications installed, you will
+have to use the root account - it is, by default, the only one allowed to mount and
+unmount disks, for example. However, conventional Unix practise is that you shouldn't then
+use the root account for anything else - you should create a user account and use that
+instead. The reasoning is that it is very easy to damage your systems inadvertently by one
+mistyped command when you're root. If you need to perform a couple of root operations, the
+command <i>su</i> will let you briefly become the &quot;superuser&quot; and do them, then
+exit back to your normal account.</p>
+
+<p>Most Linux systems boot in text mode, and after you log in, you type <i>startx</i> or <i>kde</i>
+to launch the GUI. It's possible to have Xstart at boot-up and log-in through it, but
+that's beyond the scope of this piece.</p>
+
+<p><b>Shutting down</b></p>
+
+<p>When you are finished using the system, it's important to shut it down properly, or you
+risk losing data. The official way is to <i>su</i> to root and type &quot;shutdown
+now&quot;, but I find it easier to quit from X, logout with Ctrl-d and then press
+Ctrl-Alt-Del, which resets Linux as it does DOS.</p>
+
+<p><b>&nbsp;</p>
+
+<h2><a name="sec6">Putting it to work</a></b></h2>
+
+<p>Once everything's running, the next question is what to do with it - and, sadly, at
+this point many people run out of ideas and give up. Instead, ask yourself what you
+usually do with your PC.</p>
+
+<p>For most of us, a good place to start is getting it onto the Internet, which means a
+modem connection. Firstly, you need to know what serial port to use. If you configured
+this during installation, you might have a /dev/modem device which points to the current
+serial port. Otherwise, you must find it. Serial ports may be names /dev/cuan or
+/dev/ttySn, where n is the number of the port, like DOS' COMn. Internal modems are often
+port 3 or 4, and if yours is a Plug &amp; Play device, you may need to configure it with
+the isapnp command.</p>
+
+<p>The &quot;official&quot;, but tricky, way to configure a Net connection is using the
+pppd daemon. This is one area where KDE really scores. Its kppp program just needs to be
+told about your modem and ISP details, and you're away. If you don't know the port, trial
+and error will do: you can pick ports from a drop-down list and click &quot;query
+modem&quot; until it responds. Then, enter a name for your connection, and insert your
+ISP's details: at a minimum, the telephone number. If this doesn't work, use Windows to
+look on the ISP's website, or telephone its technical support line. The information you
+need is: 
+
+<ul>
+  <li>Whether it uses static or dynamic IP addressing.</li>
+  <li>If static, what your IP address is.</li>
+  <li>The IP addresses of the primary and backup DNS servers.</li>
+  <li>The IP address of their gateway.</li>
+  <li>An example of a connection script.</li>
+</ul>
+
+<p>Once you've obtained all this, select the ISP's entry in kppp and click Edit, then fill
+in the respective tabs. On the Script tab, in turn, select &quot;expect&quot; or
+&quot;send&quot; and click Insert for each line in the script. Note that there are two
+special entries, ID and Password, which you can use instead of Send to transmit whatever
+ID and password you enter on kppp's opening screen. When everything's filled-in, click
+connect and try it!</p>
+
+<p><i>&nbsp;</p>
+
+<p>Internet tools</i></p>
+
+<blockquote>
+  <p>As mentioned in the Installation section, the Linux internet tool of choice is Netscape
+  Communicator 4.7. It's free and vastly better than almost any of the alternatives. It's
+  included with Caldera and some other distributions, but if you didn't get it, make it your
+  first download. It's worth the wait, particularly as it will also enable you to read your
+  online documentation, and with tools such as the excellent Webmin (www.webmin.com) can
+  also be used to administer your machine.</p>
+</blockquote>
+<i>
+
+<p>Office productivity</i></p>
+
+<blockquote>
+  <p>There are two main contenders here, <a href="http://www.corel.com">WordPerfect</a> and <a
+  href="http://www.openoffice.org">StarOffice</a>. WordPerfect is a powerful and capable
+  word-processor and a time-limited evaluation version is available for free download [<a
+  href="images/wp8.jpg">screenshot</a>]. The rest of the WordPerfect suite hasn't been
+  ported yet, although older versions of CorelDRAW! are available commercially. Older
+  versions of StarOffice are bundled with some distributions and the latest v5 is available
+  for free on Linux for non-commercial use. StarOffice includes all the usual office suite
+  components, and has a similar look and feel to MS Office 97, whose files it can also
+  handle; this article was entirely produced in it, for instance [<a
+  href="images/staroff5.jpg">screenshot</a>]. It even includes a Start menu, Explorer and
+  email client.</p>
+</blockquote>
+<i>
+
+<p>Graphics</i></p>
+
+<blockquote>
+  <p>As well as the aforementioned CorelDRAW!, the premier image-manipulation application
+  for Linux is the GNU Image Manipulation Program - the GIMP. Its user interface is minimal,
+  but it is remarkably powerful - it was woefully underused producing the screenshots for
+  this article. There are also various simpler viewers and converters, such as ImageMagick.</p>
+</blockquote>
+<i>
+
+<p>Games</i></p>
+
+<blockquote>
+  <p>Linux isn't really a games platform, although basics such as Solitaire and Mah Jongg do
+  exist, along with unofficial ports of Doom and Quake. There are others; the best option is
+  to search some of the popular software sites.</p>
+  <p>There is also a wealth of commercial Unix software developed for commercial Unix
+  variants such as SCO. Many of these can be coaxed into life on Linux via iBCS2. This is a
+  Linux service which makes Linux conform to the Intel Binary Compatibility Standard v2, a
+  software platform to which many commercial products adhere. Such software ranges from
+  high-end publishing packages such as <a href="http://www.adobe.com">Adobe</a> FrameMaker
+  to scientific modelling tools such as <a href="http://www.wolframscientific.com">Mathematica</a>.
+  Although you shouldn't expect free demonstration versions, you do get support and
+  assistance.</p>
+</blockquote>
+<i>
+
+<p>Emulators</i></p>
+
+<blockquote>
+  <p>If you can't find a Linux version of what you need, you may be able to run a version
+  from another operating system. Most distributions include the &quot;BIOS Emulator&quot; <i>dosemu</i>.
+  Dosemu is not a DOS emulator; it's a set of kernel services that allow a real copy of DOS
+  to be booted in an X window [<a href="images/dosemu.jpg">screenshot</a>]. Caldera
+  OpenLinux includes a hard disk image pre-installed with DR-DOS 7.02 for use with it. Many
+  DOS applications (such as the <a href="http://www.cix.co.uk">CIX</a> off-line reader
+  Matrix) run happily this way. Similarly for Windows programs there is Wine. The name
+  stands for <i>Wine Is Not an Emulator</i>; instead, it's a translation layer that allows
+  both 16- and 32-bit Windows programs to run under Linux and X. More information and
+  downloads are available from www.winehq.com.</p>
+  <p>Beware, though, that both Dosemu and Wine are unfinished, and neither is perfect yet.
+  While the demands of DOS are simple enough that many programs will run, Wine isn't stable
+  enough for heavy use yet. If you need to run Windows 3 applications under Linux, Caldera's
+  Wabi may help [<a href="images/wabi.jpg">screenshot</a>]. Developed by Sun, Wabi allows a
+  real copy of Windows 3.1x to run under Linux, translating Windows graphics calls to X ones
+  on the fly. It boasts an impressive list of certified applications, including both
+  Microsoft's and Lotus' application suites, but isn't perfect - for instance, it's unable
+  to run the CIX Ameol2 OLR. Wabi is no longer being actively developed, but if you wish,
+  say, to use MS Access under Linux, it's the best option. It's sold by Caldera for around
+  $50. There are also a host of emulators for other computer systems, such as Fusion, which
+  runs MacOS, and the Amiga emulator UAE.</p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>In part two, I'll be looking at more advanced use, such as recompiling the kernel,
+adding support for &quot;unusual&quot; devices such as sound, and the 2.2.n kernel. Where
+Linux is beign used in businesses, it's typically as a server, so that area will come
+under scrutiny as well. </p>
+
+<p><strong>Biography</strong></p>
+
+<p>Liam Proven is a freelance journalist and IT consultant, specialising in networks and
+operating systems. He has worked with Unix for eleven years (alongside OS/2, VMS, Netware
+and various Microsoft OSs) and Linux for four. </p>
+
+<p>© Liam Proven 1999</p>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-gb">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>FAT cluster sizes</title>
+</head>
+
+<body>
+
+<p>Microsoft's FAT (File Allocation Table) disk format uses fixed cluster sizes
+depending on the size of the partition. This three charts on this page contain
+the sizes of cluster for different sizes of drive.</p>
+<p>The original FAT format is used from MS-DOS 2.0 onwards, and is also
+supported in OS/2, Windows NT, Windows 2000, Linux, BeOS and most PC operating
+systems, as well as non-PC operating systems such as Apple MacOS, Atari GEM,
+AmigaOS, RISC OS and others. It's the closest thing to a universally understood
+disk format there is.</p>
+<p>There are several extensions to FAT. One is Microsoft's VFAT, introduced in
+Windows 95, which uses additional directory entries to store long file names and
+additional attributes. Others are Linux's UMSDOS, which stores similar
+information along with Unix-style access permissions and file types in an
+additional &quot;--LINUX-.---&quot; file in each directory, and OS/2's system of
+&quot;extended attributes.&quot; These do not, however, change the basic
+filesystem structure. The Atari ST's TOS, based on Digital Research CP/M-68K,
+uses a different ID type but the same basic FAT structure.</p>
+<h3>FAT12</h3>
+<p>This can reasonably be called obscure these days. It is only used on
+partitions up to 16MB in size.</p>
+<table border="1" width="50%">
+  <tr>
+    <td colspan="2" align="center"><i>Drive size (MB)</i></td>
+    <td align="center"><i>Cluster size</i></td>
+    <td align="center"><i>Sectors</i></td>
+  </tr>
+  <tr>
+    <td align="center"><i>minimum</i></td>
+    <td align="center"><i>maximum</i></td>
+    <td align="center"><i>(Bytes)</i></td>
+    <td align="center"><i>per cluster</i></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>16</td>
+    <td>512</td>
+    <td>1</td>
+  </tr>
+</table>
+<h3>FAT16</h3>
+<p>Up until MS-DOS 3.3, the maximum allowed size for a partition was 32MB. This
+limit was broken by several proprietary utilities (such as Ontrack Disk Manager
+and Golden Bow's V-Feature Deluxe) and OEM versions of DOS, but the variant used
+in Compaq DOS 3.31 was the one adopted as standard in IBM's PC DOS 4 and all
+later versions of MS-DOS.</p>
+<p>Some recent versions of DOS use 2K clusters for all FAT16 partitions up to
+127MB.</p>
+<table border="1" width="50%">
+  <tr>
+    <td colspan="2" align="center"><i>Drive size (MB)</i></td>
+    <td align="center"><i>Cluster size</i></td>
+    <td align="center"><i>Sectors</i></td>
+  </tr>
+  <tr>
+    <td align="center"><i>minimum</i></td>
+    <td align="center"><i>maximum</i></td>
+    <td align="center"><i>(Kilobytes)</i></td>
+    <td align="center"><i>per cluster</i></td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>32</td>
+    <td>1</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>32</td>
+    <td>127</td>
+    <td>2</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>128</td>
+    <td>255</td>
+    <td>4</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <td>256</td>
+    <td>511</td>
+    <td>8</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>512</td>
+    <td>1,023</td>
+    <td>16</td>
+    <td>32</td>
+  </tr>
+  <tr>
+    <td>1,024</td>
+    <td>2,048</td>
+    <td>32</td>
+    <td>64</td>
+  </tr>
+  <tr>
+    <td colspan="4"><i>The following is only supported under Windows NT.</i></td>
+  </tr>
+  <tr>
+    <td>2,048</td>
+    <td>4,096</td>
+    <td>64</td>
+    <td>128</td>
+  </tr>
+</table>
+<h3>FAT32</h3>
+<p>Introduced with Windows 95B (also known as OSR2), FAT32 was developed to
+overcome the inefficiency of FAT16 on partitions larger than half a gigabyte, as
+well as to allow drives of over 2GB to be formatted as a single partition.</p>
+<p>It is also supported under Windows 98, Windows ME and Windows 2000.</p>
+<p>As it is intended to support larger volumes, sizes are quoted in Gigabytes,
+not Megabytes as in the above two tables.</p>
+<table border="1" width="50%">
+  <tr>
+    <td colspan="2" align="center"><i>Drive size (GB)</i></td>
+    <td align="center"><i>Cluster size</i></td>
+    <td align="center"><i>Sectors</i></td>
+  </tr>
+  <tr>
+    <td align="center"><i>minimum</i></td>
+    <td align="center"><i>maximum</i></td>
+    <td align="center"><i>(Kilobytes)</i></td>
+    <td align="center"><i>per cluster</i></td>
+  </tr>
+  <tr>
+    <td>½ (0.5)</td>
+    <td>8</td>
+    <td>8</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <td>8.02</td>
+    <td>16</td>
+    <td>16</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>16.03</td>
+    <td>32</td>
+    <td>32</td>
+    <td>32</td>
+  </tr>
+  <tr>
+    <td>&gt;32.04</td>
+    <td>&nbsp;</td>
+    <td>64</td>
+    <td>64</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

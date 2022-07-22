@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>32-bitness - is is the Answer to The Ultimate Question?</title>
+</head>
+
+<body>
+
+<h1><font size="4">32-bitness - is it the Answer to The Ultimate
+Question?</font></h1>
+
+<p><font size="4"><em>Feature section</em></font></p>
+
+<hr>
+
+<p>There are several reasons why 32-bit PC software is held as
+superior to 16-bit alternatives. In the context of Intel-based
+PCs, &quot;32-bit&quot; means that the program is composed of
+code designed for the 386 processor (which uses the same code as
+the 486 and Pentium). Windows 3.x and most current Windows
+programs are predominantly written in 286 code, and so suffer
+from several of the limitations of the 286 processor.</p>
+
+<p>The most serious of these is memory segmentation. To preserve
+compatibility with the older 8088 and 8080 processors, the 286
+can only handle memory in 64 kilobyte chunks called segments -
+larger sizes must be split into segment-sized pieces. This
+restriction means that much software can only handle 64k of data
+at a time - for example, the Windows Notepad, or the infamous
+Windows resources limits. Handling larger volumes is possible,
+but more difficult for the programmer, as well as being
+relatively slow. In contrast, the 386 code runs in a
+&quot;flat&quot; memory space - all memory is handled as one big
+segment, making memory access easier and faster.</p>
+
+<p>Also, the 386 processor offers hardware-based memory
+protection - programs can be prevented from accessing each
+others' memory, so if one program goes wrong, it should not
+affect the others. Presently, under Windows 3.x, if one program
+crashes, it's quite likely the whole Windows system will lock up;
+32-bit operating systems are far more resistant to this.</p>
+
+<p>The other benefits of 32-bit code are less important. The 386
+chip can access up to 4 Gigabytes - 4,096Mb - of memory, whereas
+the 286 was limited to 16Mb, the maximum file size of many 16-bit
+Windows programs. This is also part of the reason that Windows
+3's performance doesn't improve much on machines with more than
+16Mb - which will be commonplace soon.</p>
+
+<p>Windows NT, OS/2 Warp and Windows 95 are all written mainly in
+32-bit code; NT exclusively so, whilst OS/2 still has some
+insignificant leftovers from the 16-bit OS/2 v1. Major parts of
+the core of Windows 95 are still 16-bit, because to rewrite them
+would reduce its very high level of compatibility with 16-bit
+Windows software; this does, however, compromise its stability
+and multitasking compared to the &quot;pure&quot; 32-bit systems
+- only time and experience will show how well Microsoft has
+worked around this.</p>
+</body>
+</html>

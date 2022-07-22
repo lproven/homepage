@@ -1,0 +1,840 @@
+<html>
+
+<head>
+<title> Linux Masterclass Part 2</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+</head>
+
+<body TEXT="#000000">
+<i><b>
+
+<h3>
+<font FACE="Arial">Linux Masterclass Part 2</font></h3>
+</b></i>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+
+</font>
+
+<h4>
+<font FACE="Arial">Contents</font> 
+
+</h4>
+
+<ol>
+  <li>
+<font FACE="Arial">Introduction</font></li>
+  <li><a href="#sec1">
+<font FACE="Arial">Where to begin</font></a></li>
+  <li><a href="#sec2">
+<font FACE="Arial">Build your own</font></a></li>
+  <li><a href="#sec3">
+<font FACE="Arial">Gateway to the world</font></a></li>
+  <li><a href="#sec4">
+<font FACE="Arial">The main services</font></a></li>
+  <li><a href="#sec5">
+<font FACE="Arial">Sendmail</font></a></li>
+  <li><a href="#sec6">
+<font FACE="Arial">Conclusion</font></a></li>
+</ol>
+
+<h4><font FACE="Arial">Also see:
+</font>
+
+</h4>
+
+<ol>
+  <li><a href="linbiz.html"><font FACE="Arial">Linux in Business
+</font></a></li>
+  <li><a href="pppd.htm"><font FACE="Arial">Get yourself connected
+</font></a></li>
+  <li><a href="krnl22.htm"><font FACE="Arial">Kernel 2.2
+</font></a></li>
+</ol>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+
+</font>
+
+<p><font FACE="Arial">Last month we&nbsp;introduced Linux and gave you some hints to help you install your
+own Linux computer. Since then, you should have familiarised yourself with using the
+system, installing and updating software, getting your machine communicating with the
+Internet and your local area network, and generally got used to using Linux. Now, it's
+time to put that knowledge to work.
+</font> </p>
+
+<p><font FACE="Arial">Although Linux can do many things (see box on <a href="linbiz.html">Corporate Linux</a>),
+a typical use of a Linux machine on a Windows network is as an Internet gateway. While NT
+could do this, Microsoft&#146;s official solution would cost some £3,000 in licenses
+alone. Linux can do it for free while running on an old 486.
+</font></p>
+
+<p><font FACE="Arial">To keep it simple, we'll assume you already have TCP/IP configured (preferably using a
+private address range), an existing file and print server, and we&#146;ll omit a newsfeed.
+Usenet is seldom used in business, and most versions of Windows include MS Workgroup Mail,
+which can use a shared folder on one machine to host a post office which Windows Messaging
+or Outlook can use for both local mail delivery and public folders for threaded
+discussions.
+</font></p>
+
+<p><font FACE="Arial">So, the basic functions of our gateway are to connect to the Internet when required, to
+transfer mail messages between the local network and the Internet, and to allow people on
+the&nbsp;LAN&nbsp;to access Internet services - mainly browsing and downloading files via
+FTP. We&#146;ll also make the gateway host an internal web site and appear in the Network
+Neighbourhood to simplify file transfer, and have everything controlled remotely from the
+administrator's desk. If there&#146;s disagreement between traditional Unix and PC
+practices, I&#146;ll use whichever is easier.
+</font></p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec1"><font FACE="Arial">Where to begin
+</font></a></h4>
+</i>
+
+<p><font FACE="Arial">To set up a machine as a server and gateway, it&#146;s best to start with a fresh
+installation of Linux. If your machine is powerful enough, you may want to install X, but
+it&#146;s not required. Most of the tools required comes as standard, and you just have to
+select them during installation. You&#146;ll need:
+</font></p>
+
+<blockquote>
+  <blockquote>
+    <ul>
+      <li><font FACE="Arial">pppd (dial-up Internet access)
+</font></li>
+      <li><font FACE="Arial">diald (dial-on-demand)
+</font></li>
+      <li><font FACE="Arial">Apache/httpd (web server)
+</font></li>
+      <li><font FACE="Arial">squid (caching proxy server)
+</font></li>
+      <li><font FACE="Arial">sendmail (message transfer agent)
+</font></li>
+      <li><font FACE="Arial">fetchmail (POP3/IMAP mail retrieval)
+</font></li>
+      <li><font FACE="Arial">ipop3d (POP3 server)
+</font></li>
+      <li><font FACE="Arial">imapd (IMAP 4 server)
+</font></li>
+      <li><font FACE="Arial">Samba/smbfs (Windows networking)
+</font></li>
+      <li><font FACE="Arial">Webmin (remote administration)
+</font></li>
+      <li><font FACE="Arial">BIND (name server)
+</font></li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p><font FACE="Arial">Client-side tools that you will need include web and email clients, plus either a Linux
+client with X or a Windows X server. These help by letting you start and run graphical
+Linux programs remotely, even if the Linux server doesn't have X installed. You can
+download MicroImages&#146; Win32 X server MI/X for free from www.microimages.com or
+Sunsite (see <i>Get yourself connected)</i>. Whether you&#146;re using a Windows X server
+or another Linux machine, starting a remote session is the same. Launch the X server, then
+telnet into your Linux server. For security reasons Linux won't let you log in remotely as
+root, so use another ID and then use <i>su</i> to &quot;change into&quot; root. Once
+you&#146;re in, type:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">export DISPLAY=<i>(your machine's IP address)</i>:0</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">xterm &amp;</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">Some components need to be enabled before use. For instance, the kernel includes the
+ability to route TCP/IP&nbsp;packets between a local network and the Internet, but this
+may not be enabled in the preconfigured kernel supplied with your distribution. If not, to
+enable it you may need to recompile the kernel.
+</font></p>
+
+<p><font FACE="Arial">Recompiling the kernel isn&#146;t as traumatic than it sounds - a good job, as it's
+still a common task. It contains most device drivers, such as SCSI, sound and network
+adaptors. The main exceptions are graphics cards (handled by the X&nbsp;server), printers
+(Ghostscript) and scanners (SANE). Adding new hardware needn&#146;t always mean rebuilding
+the kernel - drivers can be compiled as <i>modules</i> which can be dynamically loaded or
+unloaded as required, and this process can be automated by the kernel daemon <i>kerneld</i>.
+This is becoming the preferred way of handling device support: it keeps the kernel small,
+and allows distributions to be shipped with drivers for most likely devices without
+compiling them all in. Keeping the kernel small is important not only for reasons of
+elegance, but also because a restriction of the&nbsp;PC&nbsp;BIOS means that the
+compressed kernel image must fit into the first 640K of memory.
+</font></p>
+
+<p><font FACE="Arial">So, the main reasons to recompile the kernel are to add or remove major features or
+devices necessary to boot the machine, or to upgrade to a newer version.
+</font> </p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec2"><font FACE="Arial">Build your own
+</font></a></h4>
+</i>
+
+<p><font FACE="Arial">Before you begin, back-up all your important programs and data, then make a boot disk,
+so that you can still start the system if the new kernel doesn't work. If you're lucky and
+your kernel needs no additional modules or parameters (unlikely, unless it&#146;s a custom
+one), then just copy it to a floppy and tell it where your root partition is. For example,
+my kernel is called /vmlinuz and the root partition is /dev/hda5, so the commands are:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">dd if=/vmlinuz of=/dev/fd0</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">rdev /dev/fd0 /dev/hda5</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">rdev -R /dev/fd0 1</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">This boots the kernel from floppy but gets everything else from the hard disk - the
+root filesystem, INIT structures etc. If you're using a pre-compiled kernel that came with
+your distribution, though, it's likely that it needs parameters or additional modules to
+be fully functional. If this is the case, you must build a boot diskette which starts
+Lilo, so that the kernel can be passed the correct settings. On some distributions, you
+can just type &quot;make zDisk&quot;; others use the setup program (for example,
+SuSE&#146;s YAST) to make one for you. RedHat offers to create one during installation,
+and it&#146;s a very good idea to accept. Obviously, whichever method you use, check it
+works before proceeding!
+</font></p>
+
+<p><font FACE="Arial">The kernel is supplied as a set of&nbsp;C source files, which can usually be found in
+/usr/src/linux. The directory should be a symbolic link - a shortcut - to a directory
+bearing the full name of your version, such as linux-2.0.36. To distinguish a real
+directory from a link, look at the long directory listing. A directory will show just the
+name, whereas a &quot;symlink&quot; is followed by an arrow and the name of the target:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">lrwxrwxrwx 1 1046 1046 11 Mar 21 20:04 linux -&gt;
+    linux-2.0.36</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">drwxr-xr-x 15 root root 1024 Mar 13 04:56
+    linux-2.0.36</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+If you're upgrading, don't delete the old sources. Remove the link (<i>rm linux</i> -
+it&#146;s safe, as the command will fail if <i>linux </i>isn't a link), create a directory
+for your upgraded sources (<i>mkdir linux-2.0.36</i>) and finally link this back to the
+short name (<i>ln -s linux-2.0.36 linux</i>).
+</font></p>
+
+<p><font FACE="Arial">
+
+Once the version&#146;s sorted, you configure the kernel you're going to build. This
+builds a file called .config in /usr/src/linux containing all your choices. Before you
+start, check if one already exists and save it, just in case...
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+ls -la .con*</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">
+
+mkdir ../config_backup</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">
+
+cp .config ../config_backup/old_config</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+There are three ways to build the file. The most basic method, usually to be avoided,
+is to type &quot;make config&quot;. This steps through all the settings in turn, asking
+you whether you want each one. Simpler methods are &quot;make menuconfig&quot;, which
+provides menus for selecting the various options, or best of all, to type &quot;make
+xconfig&quot; in an X shell window, which runs a graphical tool with buttons for selecting
+the options, along with comprehensive help texts explaining what each option means.
+</font></p>
+
+<p><font FACE="Arial">
+
+Whichever way, for each option, you must answer &#145;y&#146;, &#145;n&#146; or
+&#145;m&#146;. While the first two are self-explanatory, &#145;m&#146; doesn't stand for
+'maybe' - but might as well. Answering &#145;yes&#146; compiles that option in,
+&#145;no&#146; leaves it out, and &#145;m&#146; makes it a module, so that it can be
+dynamically loaded. (If you&#146;re using a fast machine to build a kernel for a slower,
+you should avoid modules.) Whichever method you choose, if you're setting up a gateway,
+remember to include IPv4 Forwarding and IP&nbsp;Masquerading.
+</font></p>
+
+<p><font FACE="Arial">
+
+Once you&#146;ve made your choices, save and exit. If you were using an X session, quit
+out to the command line. This will make things faster, and there's less to go wrong.
+Kernel compilation is one of the most processor- and memory-intensive tasks most PCs ever
+perform, so if it's going to fail, now is when it&#146;ll happen.
+</font></p>
+
+<p><font FACE="Arial">
+
+Compilation is a long job. While a fast dual Pentium II might take a few minutes, my
+56MB Cyrix P166+ takes around half an hour and a 486 will take several hours.
+</font> </p>
+
+<p><font FACE="Arial">
+
+The first stage is quick:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+make clean</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">
+
+make dep</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+The next step starts the actual compile, so we concatenate the commands:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+make zImage ; make modules ; make modules_install</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+This executes the commands sequentially, so you needn&#146;t wait to type each one.
+Reams of text scroll past as the <i>make </i>program locates and assembles all the various
+bits of code. This means nothing except to experts, and if anything serious does go wrong,
+the process will stop. So, after keeping an eye on it for the first minute or two, you may
+as well find something else to do until it completes.
+</font></p>
+
+<p><font FACE="Arial">
+
+When compilation completes, it leaves a compressed kernel image in
+/usr/src/linux/arch/i386/boot. The name may vary from one distribution to another: look
+for a new file of around 400-600KB - it might be called vmlinuz, vmlinux, zImage or
+something else.
+</font></p>
+
+<p><font FACE="Arial">
+
+The next step is to make the new image bootable. Inspect /etc/lilo.conf to determine
+whether kernels are kept in <i>/</i> or <i>/boot</i> and copy the new one to the same
+place under a different name:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+cp /usr/src/linux/arch/i386/boot/vmlinux vmlinuz-new</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Before amending lilo.conf, copy your old one in case of a mistake:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+cd /etc</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">
+
+cp lilo.conf lilo.conf.backup</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Open the original in your preferred text editor, and look for the section that points
+to your old kernel (the first section in the example file below), and duplicate it (second
+section). Edit the duplicate copy to point to your new kernel. You should now have two
+entries (above any you may have for other operating systems) - one for the original kernel
+and one for the new one, under a different name and label.
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># general section</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">boot = /dev/hda5</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">install = /boot/boot.b</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">message = /boot/message</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">prompt</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># wait 20 seconds (200 10ths) for user to select the
+    entry to load</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">timeout = 200</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># default entry</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><b><font FACE="Courier New">image = /vmlinuz</font></b></td>
+  </tr>
+  <tr>
+    <td><b><font FACE="Courier New">label = linux</font></b></td>
+  </tr>
+  <tr>
+    <td><b><font FACE="Courier New">root = /dev/hda5</font></b></td>
+  </tr>
+  <tr>
+    <td><b><font FACE="Courier New">read-only</font></b></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># additional entries</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">#</font></td>
+  </tr>
+  <tr>
+    <td><i><font FACE="Courier New">image = /vmlinuz-new</font></i></td>
+  </tr>
+  <tr>
+    <td><i><font FACE="Courier New">label = newlinux</font></i></td>
+  </tr>
+  <tr>
+    <td><i><font FACE="Courier New">root = /dev/hda5</font></i></td>
+  </tr>
+  <tr>
+    <td><i><font FACE="Courier New">read-only</font></i></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">other=/dev/hda1</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">label = win95</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">table = /dev/hda</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">loader = /boot/chain.b</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Now, save and exit, then type Lilo. As it runs, it reads the new lilo.conf file,
+updates itself so that it can find both old and new kernels and recognise their labels
+when typed at the boot prompt, and prints &quot;adding <i>name</i>&quot; for each entry.
+The default one is indicated with an asterisk.
+</font></p>
+
+<p><font FACE="Arial">
+
+You're now ready to try it out! Quit all programs, logout and press Ctrl-Alt-Del to
+restart the system. When the <i>boot: </i>prompt appears, type the label of your new
+kernel. With luck, it will boot smoothly.
+</font></p>
+
+<p><font FACE="Arial">
+
+If it doesn't, restart the computer - you may have to use the reset button or power
+switch - and try the old kernel by hitting <i>Return </i>at the boot: prompt. If all else
+fails, use your boot floppy, restore your backup lilo.conf file, and rerun lilo. Reboot,
+and you're back at square one and can try rebuilding the kernel again.
+</font></p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec3"><font FACE="Arial">
+
+Gateway to the World
+</font></a></h4>
+</i>
+
+<p><font FACE="Arial">
+
+When there&#146;s a connection between your LAN and the Internet, security matters.
+There are two main ways of preventing crackers from breaking in: a firewall, which blocks
+certain TCP/IP ports, and IP Masquerading, which hides all the internal IP addresses on
+your LAN from the rest of the world; the gateway itself appears to be the only machine.
+</font></p>
+
+<p><font FACE="Arial">
+
+The easiest way to get Linux on the Internet is with a graphical tool such as <i>Kppp</i>.
+Unfortunately, this isn&#146;t appropriate for a server; aside from a GUI on a server
+wasting resources, a gateway must be able to bring up and drop the link when required -
+&quot;dial-on-demand&quot;. Getting this working unavoidably means editing a few
+configuration files, but we&#146;ve detailed the process for you in <i><a href="pppd.htm">Get
+yourself connected</a>.
+</i>
+
+</font></p>
+
+<p><font FACE="Arial">
+
+However, once that&#146;s done, almost everything else can be configured using just a
+web browser, with the aid of a remarkable program called <a href="http://www.webmin.com">Webmin</a>.
+It&#146;s not unique - Red Hat&#146;s very useful <a
+href="http://dns.solucorp.qc.ca/linuxconf"><i>Linuxconf</i></a> (available for Red Hat,
+Caldera, SuSE and Debian) can also be driven with a browser, but they&#146;re
+complementary rather than competitive. Whereas Linuxconf focuses on machine setup,
+Webmin&#146;s designed for server administration. The latest version is currently 0.71,
+and it should be the first step in setting up your gateway. Getting it onto your machine
+is easy - the tarball fits onto a single 1.4MB diskette. (If you download it with Windows,
+you&#146;ll find <i>mcopy</i> useful - it copies files to and from FAT diskettes without
+mounting them.
+</font></p>
+
+<p><font FACE="Arial">
+
+Copy the tarball to a temporary directory (<i>mcopy /dev/fd0 /tmp</i>), then unpack it
+into your /opt directory - it will create a folder for itself automatically. Change to the
+new folder and run setup-sh. It will ask a few simple questions and configure itself. When
+it&#146;s done, fire up a web browser (on the same machine or another on the LAN) and type
+in the address of the Linux machine followed by a colon and the port number you chose -
+the default is 10000. You should see the Webmin screen appear. (Linuxconf uses the same
+principle, but on port 98.)
+</font></p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec4"><font FACE="Arial">
+
+The main services
+</font></a></h4>
+</i>
+
+<p><font FACE="Arial">
+
+Once you have Webmin running, the rest is easy, although you may have to obtain and
+install appropriate versions. You should update to BIND v8.2, as this handles intermittent
+Internet connections better, and Sendmail 8.9, for improved security.
+</font></p>
+
+<p><font FACE="Arial">
+
+Once BIND is installed, go to Webmin&#146;s BIND8 page. You should find a single local
+zone of 127.0.0. Select &quot;create a new forward zone&quot;, fill in the name your ISP
+has allocated (for example, lproven.cix.co.uk), fill in the addresses of your ISP&#146;s
+primary and backup name servers, and click &quot;Create zone&quot;.
+</font> </p>
+
+<p><font FACE="Arial">
+
+Test it by pinging a website by name - the name server should check the name, find
+it&#146;s not in the cache, dial the ISP and consult its servers. The only manual change
+you may want to make is to add these lines to the options section of /etc/named.conf:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">
+
+dialup yes;</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">
+
+heartbeat-interval 86400;</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+This tells the name server that all zones are dial-up and that it should only refresh
+them once a day. It&#146;s worth noting is that the DNS server&#146;s cache is held only
+in memory, so if the machine is ever rebooted, all information must be rebuilt.
+</font> </p>
+
+<p><font FACE="Arial">
+
+Configuring Squid is similar. Once IP forwarding&#146;s working, clients can
+&quot;surf&quot;; you need only enter the Linux machine&#146;s IP address in each
+client&#146;s TCP/IP settings as the gateway and DNS server. However, if two people access
+the same page, it will get downloaded twice; adding Squid will speed up Web access
+dramatically. Go to Webmin&#146;s Squid page. The only option you <i>must </i>set is
+&quot;Proxy port&quot; under &quot;Ports and Networking&quot; - I suggest 8080. Click
+&quot;Save&quot;, then &quot;start Squid&quot; or &quot;apply changes&quot;.
+</font></p>
+
+<p><font FACE="Arial">
+
+Next, configure the client&#146;s browsers to use the cache. The settings dialog box
+moves about from version to version; in IE5, it&#146;s under Tools/Options/Connections,
+while in Netscape 4 it&#146;s under Edit/Preferences/Advanced. Enter the name of the
+gateway as the HTTP proxy and 8080 as the port. Click OK, then open any web page. If you
+now go to another machine and enter the proxy details, that page should open almost
+instantly.
+</font></p>
+
+<p><font FACE="Arial">
+
+Configuring Apache with Webmin is fairly self-explanatory; you should be able to access
+the default website (under /home/httpd/html) by pointing your browser at the gateway
+itself; this includes online documentation.
+</font></p>
+
+<p><font FACE="Arial">
+
+Click &quot;Samba Windows File Sharing&quot; to control shared resources. The main
+things to set are &quot;Workgroup&quot; and &quot;Server name&quot; under &quot;Windows
+Networking.&quot;
+</font> </p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec5"><font FACE="Arial">
+
+Sendmail.cf: the most terrifying configuration file in the world
+</font></a></h4>
+</i>
+
+<p><font FACE="Arial">
+
+To keep your confidence up, I&#146;ve left the hardest part until last. Configuring
+email isn&#146;t especially complex, but the setup for non-Unix clients and a dial-up ISP
+account is almost undocumented, and there are several special considerations. As the <i>sendmail.cf</i>
+file is extremely difficult and unreadable, we will avoid editing it altogether; most
+distributions include a working one, or one can be downloaded from Sunsite or elsewhere.
+</font></p>
+
+<p><font FACE="Arial">
+
+You need an ISP that provides a virtual mail server (for example, CIX Internet users
+get one in the form of [accountname].cix.co.uk). Some only provide a limited number of
+fixed addresses, so ask - most are happy for multiple users to be connected through a
+gateway, and just won&#146;t offer technical support for it.
+</font></p>
+
+<p><font FACE="Arial">
+
+Firstly, create an ordinary user account on the gateway for each email address, either
+using Webmin or your distribution&#146;s setup program. For testing purposes, it&#146;s
+useful to be able to login as each user. A text-mode email program such as Pine will also
+help, as will a separate working email account (such as Hotmail) for test messages. Create
+a couple of test users and practice using Pine or the <i>mail </i>command to send mail
+between them.
+</font></p>
+
+<p><font FACE="Arial">
+
+Sendmail will readily transmit email from your network to your ISP; just enter the
+details with Webmin. Go to &quot;Sendmail Configuration&quot;, &quot;Sendmail
+Options&quot;, and enter your ISP&#146;s mail server name under &quot;Send outgoing mail
+via host.&quot; Save, and go back up one level. Next, go to &quot;Domain
+Masquerading&quot; and insert your virtual domain name (say, <i>lproven.cix.co.uk</i>)
+under &quot;Masquerade as domain.&quot; If you don&#146;t do this, mail will appear to
+come from &lt;gatewayname&gt;.&lt;domainname&gt; and incoming messages will fail.
+</font> </p>
+
+<p><font FACE="Arial">
+
+A supplementary utility, <i>fetchmail,</i> collects messages from a POP3 or IMAP
+mailbox at the ISP and passes them to sendmail. To configure it, use <i>fetchmailconf</i>,
+a friendly graphical utility; either start an X session on the gateway, if it&#146;s
+installed, or start it remotely from another Linux machine. Although it will work with
+MI/X, font problems may make the output hard to read. The program is largely
+self-explanatory; you enter your ISP&#146;s mail server, username and password, and click
+two buttons to autoconfigure and test. For more information, read the well-written and
+helpful man page: <i>info fetchmail</i>.
+</font></p>
+
+<p><font FACE="Arial">
+
+To automate sending and retrieval, edit your ip-up.local file, which runs every time
+the gateway connects - see <i>Get yourself connected.
+</i>
+
+</font></p>
+
+<p><font FACE="Arial">
+
+That&#146;s all that&#146;s needed for Linux users to handle external email - try it
+with some telnet or xterm sessions and a Hotmail (or similar) account. However, a couple
+more steps are needed for non-Unix clients.
+</font></p>
+
+<p><font FACE="Arial">
+
+While most desktop email clients use SMTP (sendmail&#146;s protocol) to send messages,
+they use POP3 or IMAP to receive them, and this requires extra software on the server. The
+daemons are logically named - imapd for IMAP and ipop3d for POP3. As usual, these are
+normally provided - you should find them in <i>/usr/sbin</i>. After Linux mail&#146;s
+working, start them from the root prompt:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font face="Courier New">/usr/sbin/imapd &amp;</font></td>
+  </tr>
+  <tr>
+    <td><font face="Courier New">/usr/sbin/ipop3d &amp;</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Both operate in the background. Now try connecting with Communicator or Outlook, and
+you should be able to send and receive messages on each of your accounts. To get the
+daemons to start automatically when the gateway boots, go to Webmin&#146;s &quot;Bootup
+and Shutdown Actions&quot; page. You need to go through &quot;create a new bootup or
+shutdown action&quot; once for each one; fill in reasonable names and descriptions and
+enter <i>/usr/sbin/ipop3d</i> or <i>/usr/sbin/imapd </i>as the bootup commands. Lower down
+is a table of &quot;Runlevels to start up and stop in&quot;; place a cross in the box to
+the left of &quot;Start at&quot; in Runlevel 3 for both - this is normal operating mode.
+If you will be running X on the gateway, you should also select runlevel 5. Webmin will
+fill in the &quot;start at&quot; field, write the appropriate scripts and insert them into
+the gateway&#146;s INIT sequence for you.
+</font></p>
+
+<p><font FACE="Arial">
+
+You might wish to schedule a regular connection to exchange mail even if no-one is
+using the web. To do so, create a file called /etc/ppp/link-up that contains the
+following:
+</font></p>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><font FACE="Courier New">#!/bin/sh</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New"># Bring up the link</font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">echo &quot;up&quot; &gt; /etc/diald/diald.ctl</font></td>
+  </tr>
+</table>
+</div>
+
+<p><font FACE="Arial">
+
+Set it as executable with &quot;</font><i><font face="Courier New">chmod 777 link-up</font><font FACE="Arial">&quot;.
+</font>
+ </i><font FACE="Arial">You can schedule this
+to run at particular times using &quot;Create Cron Job&quot; on Webmin&#146;s
+&quot;Scheduled Cron Jobs&quot; page.
+</font>
+</p>
+
+<font FACE="Arial" SIZE="4">
+
+<p>&nbsp;</p>
+</font>
+<i>
+
+<h4><a name="sec6"><font FACE="Arial">
+
+The End
+</font>
+</a></h4>
+</i>
+
+<p><font FACE="Arial">
+
+And that&#146;s it. If all&#146;s gone well, you now have a gateway that provides a
+fast and secure link between your LAN and the Internet. The test machine used to research
+this feature was a 486DX2/66 with 20MB of RAM and a 700MB hard disk, but a lower
+specification would work - only Squid is memory-hungry. A CD with all the software can be
+bought for a couple of pounds from the <a href="http://www.polo.demon.co.uk/emporium">Linux
+Emporium</a> or many other sources - or downloaded for free.
+</font>
+ </p>
+</body>
+</html>

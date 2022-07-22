@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>SMP box</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body>
+<h1><font size=5>Windows NT and Symmetric 
+Multi-processing</font></h1>
+<hr>
+<h2><font size=4>Liam Proven runs us through the various types of 
+multiple processing.</font></h2>
+<p>Most computers in use today, from PCs to mainframes, belong to the same 
+basic school of design - the von Neumann architecture. It requires that all 
+the instructions and data upon which the computer works pass through a 
+single Central Processing Unit (CPU). In comparatively small and cheap 
+computers such as PCs, the limiting factor on the machine's speed is usually 
+the rate at which data can be moved through that single CPU, rather than 
+how fast the CPU works. Gradually, though, this is changing: as the 
+component technology becomes faster and cheaper, more sophisticated 
+designs such as EDO memory and high-speed local buses enable data to be 
+moved around the machine faster, and the speed of the CPU becomes the 
+major limiting factor. Multitasking computers give the appearance of doing 
+more than one thing at a time by switching between several different 
+programs very quickly - but there is only ever one program running at any 
+given moment. The only way around this restriction is to have more than one 
+processor, so that multiple programs - or parts of a single program - can run 
+concurrently. As this is one of the most fundamental changes that can be 
+made to a computer's design, there are several different ways to accomplish 
+it.</p>
+<p>Massive parallelism ensures that different processors don't compete by 
+forcing them to march in step - by running different parts of the same 
+program on all of them. For example, a program trying to simulate the 
+weather of a landmass could have different processors working on different 
+geographical areas. This kind of computer is very specialised - software and 
+hardware form a near-inseparable pair, and other programs won't run any 
+faster on that machine - if at all.</p>
+<p>Asymmetric multiprocessing dedicates different processors to different jobs: 
+for instance, some might look after input/output, some handle the screen, 
+some running the main operating system and others the users' programs. 
+One processor is the master, and controls the other, subsidiary ones, which 
+may be totally dissimilar - for instance, the CPU might be an Intel chip 
+controlling Motorola slave processors. This is relatively simple to design, but 
+results in a specialised machine - such as one of NetFrame's high-end file 
+servers.</p>
+<p>Symmetric multiprocessing (SMP) is the most flexible method of all. In an 
+SMP computer, there are several processors, any of which may do any job 
+- none is the master. The operating system runs on all of them, and decides 
+which tasks execute on which chips. SMP requires considerable arbitration 
+and co-ordination between the processors, at both hardware and software 
+level, to assign tasks amongst the processors while preventing them from 
+treading on one another's toes. However, in theory, this kind of computer 
+can run several programs simultaneously at the speed they would achieve if 
+each had the computer to itself - as long as it has enough processors to go 
+around. Managing the activities of several separate processors requires an 
+operating system specifically designed for a multiprocessor computer - in 
+this case, Windows NT. This is one of the most significant differences 
+between NT and Windows 3 or its descendant, Windows 95, which are 
+strictly uniprocessor OSs.</p>
+</body>
+
+</html>

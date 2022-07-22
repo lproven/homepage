@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+
+<head>
+<title>RAM technologies</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 1.1">
+</head>
+
+<body>
+<p><font size=4><strong>DIMMs, SIMMs and SDRAM</strong></font></p>
+<hr>
+<p>When PC Pro looked at 166MHz Pentium-class machines last November 
+(issue 25 p77), for the first time there were a significant number of machines 
+with the new HX and VX versions of Intel&#146;s 430 PCIset - the &quot;Triton&quot; 
+chipset. One of the claimed advantages of the VX chipset was its ability to 
+accept a new type of memory, Synchronous or SD RAM. </p>
+<p>Conventional RAM, both FP and EDO, requires each memory location to 
+be read in turn. FP-DRAM typically has a burst rate of 5/3/3/3 (the number 
+of processor cycles required for each bit to be read in a 4-bit &quot;burst&quot;). EDO 
+RAM improves on ordinary DRAM by pipelining the operation: while one 
+location is still being read, the next is being prepared. This improves 
+subsequent accesses, giving a burst rate of 5/2/2/2.</p>
+<p>SDRAM is quite different. It exploits the fact that most PC memory 
+accesses are sequential - i.e., blocks of memory are read rather than 
+individual bytes. It is designed to fetch all the bits in a burst as fast as 
+possible: the system controller provides the location and size of the block of 
+memory required, and the SDRAM chip supplies the bits as fast as the CPU 
+can take them - that is, synchronously. However, the initial command phase, 
+when the block is defined, take longer, giving a burst rate of 6/1/1/1.</p>
+<p>For issue 25, we tested one VX machine with ordinary &quot;Fast Page mode&quot; 
+DRAM, EDO DRAM and SDRAM, but found that there was no significant 
+performance difference between EDO and SDRAM, although both were 
+about 5% better than FP DRAM. Because the gains were insignificant, 
+SDRAM has remained fairly rare in mainstream machines, and it has stayed 
+more expensive, at around twice the price of EDO RAM.</p>
+<p>Now, Intel has released another version of the Triton chipset, the 430TX, 
+which is claimed to be especially suitable for the new MMX Pentium 
+processors - and it also supports SDRAM. We re-tested the ASUStek TX 
+motherboard with 32MB EDO and SDRAM DIMMs and an MMX P200, 
+and its score went from 3.94 to 4.02 - an improvement of only 2%. It looks 
+like SDRAM&#146;s time won&#146;t come until motherboard bus speeds improve to 
+much more than the current 66MHz, thus reducing that initial command 
+phase time.</p>
+</body>
+
+</html>

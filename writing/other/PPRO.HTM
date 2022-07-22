@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>First Pentium Pros</title>
+</head>
+
+<body>
+
+<h1><font size="5">The First Pentium Pros</font></h1>
+
+<h1><font size="3"><em>These pieces comprise the bulk of a
+feature; the introduction and some other parts were written by
+other PC Pro staff and contributors.</em></font></h1>
+
+<hr>
+
+<h1><font size="5"><em>Systems</em></font></h1>
+
+<hr>
+
+<h2><font size="3">Dell Optiplex Pentium Pro 150MHz</font></h2>
+
+<p>The machine we looked at was a prototype, using a debug
+version of the motherboard chipset and BIOS; as such, it's not as
+fast as it will be using a fully finished motherboard. However,
+the difference should be small, especially as the BIOS isn't used
+by NT at all. Even allowing for that, it's a very fast PC,
+although it really only shows its heels to a Pentium when running
+CPU-intensive 32-bit code.</p>
+
+<h2><font size="3">Benchmark results</font></h2>
+
+<p>CorelDRAW's redraw times were an impressive one-third faster
+than on the Pentium-133 machine, but oddly Corel's full-screen
+preview wouldn't work - we just got a blank screen. As this
+worked on the Pentium computer, using the same hard disk and
+graphics card, it's probably a CPU or motherboard glitch, but
+such things are to be expected; it's still very early days for
+Pentium Pro PCs. Loading times were not much improved, as this
+depends more on the hard disk - a faster CPU doesn't really help.</p>
+
+<p>Photoshop was less impressive, registering an improvement of
+only 12%. With 64Mb of RAM, even our 8Mb test image can be
+manipulated entirely in memory, without the hard disk being
+accessed at all, so this is a test of pure CPU power, compared to
+the Corel test which involves drawing to the screen as well.
+Calculating the effects of a filter on an image takes
+floating-point maths: basically, Photoshop is simulating putting
+a piece of special glass in front of the lens of the virtual
+&quot;camera.&quot; Changing all the millions of pixels in the
+image, though, is mainly an integer operation. Photoshop always
+operates internally in 24-bit &quot;true colour&quot;, whatever
+the screen resolution - in our test, whilst each filter took some
+ten seconds to apply, redrawing the screen took only a fraction
+of a second, so there's little difference between 8-bit and
+24-bit display modes, and we've left the 8-bit mode results out.</p>
+
+<p>The Caligari TrueSpace test showed the biggest speed gains of
+all. Every pixel in each frame is rendered individually, during
+which time the picture slowly appears on the screen; this process
+is so gradual that the speed of the graphics card has little
+impact. When complete, it's saved to disk and the program
+progresses to the next frame, but the time taken to save is
+insignificant to the overall test: it's basically pure
+floating-point 32-bit number crunching. Similarly to Photoshop,
+the display mode has little impact on the final times, so we've
+omitted the 256-colour results. This program showed a stunning
+44% increase - comparable with the jump from a 486 to a Pentium.</p>
+
+<p>Both the Excel tests fared well. We have two separate
+benchmarks for this package, a &quot;business&quot; one, which
+mainly uses simple arithmetic (using mostly just two decimal
+places) and some sorting, and a scientific one with more
+functions and advanced floating-point maths; both draw a variety
+of charts. The Pentium Pro's floating-point maths performance is
+pretty good, so the scientific test benefits slightly more, but
+both were a gratifying one-third faster than the Pentium-133. The
+many figures and comparatively simple charts don't really stretch
+the graphics card, and the scientific test in particular was much
+faster in 256 colours than in 16 million.</p>
+
+<p>The final 32-bit application is Word. This test uses no
+colour, and exercises the graphics card's ability to redraw text
+quickly - something which is much faster in 256 colours than in
+16 million, simply because there's only one-third as much screen
+data to shift around. Despite this, it was surprising that the
+Word test in true colour mode was noticeably slower on the
+Pentium Pro - this seems to highlight the motherboard's
+inefficiency at getting data to and from the graphics card
+quickly enough. In 256 colours, the situation is reversed and the
+Pentium Pro is far faster, gaining a few percent more than even
+TrueSpace.</p>
+
+<p>Finally come the 16-bit applications, Pagemaker and Access.
+The results for Access are surprising and pleasing: despite the
+acknowledge fact that a Pentium Pro is slower on 16-bit code than
+a Pentium, the Access test is faster on the Pentium Pro! This is
+probably down to the massive amounts of RAM in this machine: the
+whole program and database sit in NT's disk cache. Whilst the
+test is designed to exercise the hard disk, on this machine it's
+actually testing NT's caching code. Although with a more moderate
+amount of memory, this would slow down a lot, it does go to show
+that a slower CPU needn't mean a slower PC. Pagemaker ran quite
+slowly in true colour mode, losing nearly 20% to the Pentium-133;
+however, in 256 colours, it did rather better, beating the older
+CPU by a third.</p>
+
+<h2><font size="3">Summary</font></h2>
+
+<p>Overall, the Dell Pentium Pro is a faster machine than an
+identically-equipped Pentium 133, but only by a modest 15-25%.
+The results are complicated by the fact that its #9 Imagine 128
+graphics card is designed for true colour work, where the
+immature design of the motherboard and chipset really let it
+down. In a more typical 256-colour mode, the machine does a lot
+better, but the graphics card becomes a handicap. Our tests
+encompass both 32-bit and a smaller amount of 16-bit software -
+if you were buying a machine like this, you would probably have a
+specific purpose in mind. Running mainly with a couple of
+selected 32-bit programs, and matched to an appropriate graphics
+card, the machine should be substantially faster than a
+Pentium-133, by around a third to a half. However, it's let down
+by an immature chipset; given another few months of development,
+and with a wider choice of 32-bit Windows software, it will
+really shine.</p>
+
+<h2><font size="4">Apricot LX650</font></h2>
+
+<h2><font size="3">What's in the box</font></h2>
+
+<p>The Apricot is the only machine we've seen so far that doesn't
+use an Intel motherboard, although like the other machines it's
+based on Intel's Orion GX chipset. The motherboard is one of
+Apricot's own LX series, although unlike some of their machines,
+it doesn't include an Ethernet interface; what it does have is
+integrated graphics using a Cirrus Logic 5436 chipset, as well as
+all the usual interfaces: EIDE, parallel, serial, PS/2 mouse and
+keyboard ports. An option that may be added later is an infra-red
+port for wireless communications with printers, notebooks or
+pocket computers. Another interesting feature is its memory
+slots: rather than the usual 72-pin SIMMs, which contain 32-bit
+wide memory, this motherboard takes 64-bit DIMMs (Dual Inline
+Memory Modules). This means that DIMMs can be added singly,
+unlike SIMMs which must be added in pairs - this gives more
+flexiblity, but they will be harder to find for a while yet. For
+the review machine, Apricot had added a Stealth 64 Video VRAM PCI
+graphics card, a more sensible choice for true-colour work than
+the inbuilt graphics. Whilst EIDE is an economical option for
+most PCs, SCSI remains the storage system of choice for high-end
+machines - into which category all Pentium Pros definitely fall
+at the moment! As such, Apricot chose an Adaptec 2940 PCI fast
+SCSI host adaptor, coupled to a Seagate 2Gb hard disk and Sony
+quad-speed CD-ROM - just about the best components that (quite a
+lot of) money can buy. </p>
+
+<h2><font size="3">Benchtest results</font></h2>
+
+<p>All PC Pro's benchmarks are run in a 1024x768 screen mode, but
+unfortunately the Apricot's Stealth card had only 2Mb of video
+RAM - insufficient for the true colour at this resolution. We
+used the built-in card for testing in 256 colours, and added an
+Hercules Terminator (based around the same S3 968 chipset as the
+Stealth) for true-colour tests. As the Hercules only came with
+drivers for older versions of NT, and Hercules had no NT drivers
+in their CompuServe forum, we had to use NT's generic S3 drivers,
+reducing the machine's true colour performance slightly. This was
+one of a number of minor difficulties which reflect the immature
+nature of these machines. One other difference is that the
+Apricot's tests were run from its SCSI drive, unlike the EIDE
+machines, in which we installed PC Pro's own drive and ran the
+tests from there.</p>
+
+<p>In the CorelDRAW test, the Apricot was marginally the slowest
+of the three in true colour mode, but this is probably the fault
+of the non-specific screen drivers. In contrast, in 256 colours,
+it's just in the lead, but there's only 2% between fastest and
+slowest - not a significant difference.</p>
+
+<p>The Photoshop test places it between the other two machines in
+both colour depths.</p>
+
+<p>In TrueSpace, it does very well, clearly the fastest of the
+trio. This test involves more disk access than most, where the
+SCSI disk will help; also, the Apricot seems to have the edge on
+raw CPU bandwidth.</p>
+
+<p>The 16-bit Pagemaker test places it between the others again,
+and slightly slower than the Pentium machine in both 8-bit and
+24-bit colour. In true colour, the Apricot's Access result is
+again middling, but in 256 colours it pips both of the others to
+the post, and is still faster than the Pentium with this 16-bit
+program.</p>
+
+<p>In the Word and Excel tests, the Apricot does well in 256
+colours, but again it's poorer in true colour where Hercules card
+has to move a lot of text around.</p>
+
+<h2><font size="3">Conclusion</font></h2>
+
+<p>The Apricot has a good, fast hard disk subsystem and a
+polished motherboard design, but its true colour results are
+handicapped by NT's generic S3 graphics drivers. Nonetheless, it
+has the best overall result in both colour depths. Shipping
+machines will have better-chosen graphics adapters, and as such
+will probably be the fastest of the first wave of Pentium Pro
+PCs.</p>
+
+<h2><font size="4">Viglen Genie Pro 150</font></h2>
+
+<p>This machine performed similarly to the Dell, with the same
+amount of memory and the same hard disk drive but a different
+graphics card - a Diamond Stealth 64 968 with 4Mb of VRAM, which
+isn't quite equal to the Imagine 128 in true colour, but beats it
+in 256. In the very CPU-intensive TrueSpace and Corel tests, it
+was a few seconds ahead of the Dell; this is probably thanks to
+the final-version chipset and motherboard, although it sill had a
+beta BIOS. Oddly, though, it was slightly slower in Photoshop.
+Where the Stealth card had to move a lot of screen data around in
+true colour mode, the machine fell down badly, but in 256 colours
+it gave very similar timings to the Dell. </p>
+
+<hr>
+
+<h1><font size="4"><em>Box:</em> Alternatives to the Pentium and
+Pentium Pro</font></h1>
+
+<p>All IBM-compatible PCs use central processors which are either
+members of Intel's 80x86 range, or are compatible with them; they
+have to, because the great strength of the PC is the biggest
+selection of software of any computer - and it's all written for
+x86 processors. However, as the &quot;What's wrong with the
+Pentium Pro?&quot; box describes, this advantage is becoming a
+problem. Intel-based PCs have to compete with other,
+non-IBM-compatible computers based around newer processor
+designs, which are not so restricted by the need for
+backwards-compatibility because no other type of computer has
+such a legacy of software and users. Most of the innovations in
+recent Intel chips had been seen much earlier in competing RISC
+designs: the 486 is a scalar design, meaning that it has a
+pipeline, used in several RISC chips in the 1980's, as was the
+Pentium's superscalar architecture, with multiple pipelines.</p>
+
+<p>About a decade ago, when some influential customers refused to
+use x86 chips as long as they had only one source, Intel licensed
+AMD and Harris to produce &quot;clones&quot; of their 286
+processor, and AMD still make their own brand of 486 today, which
+is just different enough from Intel's to avoid legal action.
+Other companies have independently produced compatible chips -
+primarily Cyrix, who sell their own design of 486. The
+difficulties of building a superscalar x86 chip are many, though,
+so the builders of Intel-compatible processors face two problems:
+not only must they design a complex chip that's faster than a
+486, they also have to do it in a way sufficiently different from
+Intel that they won't get sued. AMD and Cyrix have both been
+working on just this for years, but neither have a product that's
+ready for market yet - and Intel have already finished the
+Pentium's successor, the Pentium Pro. Only one company have a
+Pentium-class chip on sale: NexGen with their Nx586. In
+development since before the 486, this uses a similar but
+slightly more advanced design compared to the Pentium, meaning
+that it's slightly faster than a Pentium at the same clock speed.
+However, it lacks the Pentium's built-in floating point unit, and
+needs a different socket, so it won't fit onto a Pentium
+motherboard. Technicalities aside, NexGen's also attacking a very
+well-established competitor.</p>
+
+<p>Although Intel's difficulties developing the x86 family also
+handicap its cloners, there are other companies aiming for the
+same market with no such hindrances. The main alternative to
+IBM-compatible PCs for a decade has been Apple with the
+Macintosh, who have very successfully moved their entire range
+from Motorola 680x0 CPUs to a new and completely incompatible
+32-bit RISC processor ramge, the PowerPC, codesigned by Motorola
+and IBM. The current fastest PowerPC, the 150MHz PPC604, is
+roughly twice as fast as Pentium-133, and the range is used by
+two of the biggest PC manufacturers in the world - it may prove
+to be Intel's most dangerous rival.</p>
+
+<p>Intel and Motorola's present offerings are basically 32-bit
+designs, although Motorola's 64-bit PPC620 is nearly ready - but
+some companies have had 64-bit processors on sale for a year or
+more. Digital, who aside from making Intel-based PCs has long
+been a leader in minicomputers and workstations, has the world's
+fastest microprocessor, the Alpha AXP, and Silicon Graphics'
+subsidiary MIPS has the R4x00 and R8000. All of these chips are
+established in their current markets, and they can all run
+Windows NT, making it relatively easy for software companies to
+convert their Windows software to these chips.</p>
+
+<p>Intel's plans for the future of the x86 line are to combine it
+with Hewlett-Packard's Precision Architecture chip to create a
+modern RISC processor that can run existing x86 software, which
+is a very difficult and ambitious project - and they have many
+impatient rivals.</p>
+
+<hr>
+
+<h1><font size="4"><em>Summing up</em></font></h1>
+
+<p>None of the machines we saw was 100% finished and ready to go
+on sale, but it's still very early days - these machines were the
+only ones of their type that their manufacturers had in the
+country at the time. The Apricot did best overall, but they all
+have strong and weak points - for example, the Dell has a superb
+graphics adaptor that its motherboard can't fully exploit,
+whereas the Apricot's good motherboard and SCSI storage couldn't
+be matched with an appropriate graphics card. The Viglen was the
+only machine to have just one of its pair of memory banks filled
+- when both are filled, the Orion chipset uses a technique called
+memory interleaving to spread the load between the two, which the
+Apricot and Dell both could use, and this pulls the Viglen's
+results down a little.</p>
+
+<p>The Pentium Pro really needs pure 32-bit software, and this
+means Windows NT. One aspect of all these systems that stood out,
+as it did some months ago in PC Pro's Labs test on NT
+Workstations, is that manufacturers don't seem to know how to
+fine-tune an NT system to give its best. One machine had a
+FAT-format hard disk, and none of them came with the latest NT
+Service Pack - a quarterly maintenance kit from Microsoft
+containing bug-fixes and updated drivers.</p>
+
+<p>During the lifetime of a processor, system manufacturers
+gradually refine the various supporting subsystems, driver
+software and so on to get the best results from the CPU. The
+Pentium Pro is a very different animal from its predecessor - it
+needs time for the fine-tuning of motherboards and chipsets, and
+to accumulate a decent base of 32-bit Windows software. At
+present, cards and drivers are designed and optimised for Pentium
+or 486 machines. The Pentium Pro isn't such a big increase in
+performance as the Pentium was, and whilst all three PCs were
+exceptionally fast computers, the difference from a 133MHz
+Pentium isn't great. At certain tasks, they will excel and give
+30-50% better performance than a Pentium, but in general daily
+use the difference will be much smaller, and it would almost
+disappear with Windows 95 and 16-bit applications. There are
+faster Pentiums coming, too - 150 and 166MHz chips should be with
+us soon. It will take quite a while for the Pentium Pro to really
+show its potential.</p>
+</body>
+</html>

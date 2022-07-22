@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>How a PC works: motherboards</title>
+</head>
+
+<body>
+
+<h1><font size="4">How a PC Works: Motherboards</font></h1>
+
+<p><font size="4"><em>Feature section</em></font></p>
+
+<hr>
+
+<h2><font size="3">Introduction</font></h2>
+
+<p>The motherboard is the fabric that interconnects all the other
+components of a PC. It's composed of a chipset, known as the
+&quot;glue logic&quot;, some code in ROM, and the various
+interconnections or buses. Modern PC designs use multiple
+different buses to link their various components. Wide,
+high-speed buses are difficult and expensive to produce: the
+signals travel so fast that distances of only a few centimetres
+cause timing problems, and the metal tracks on the circuit board
+act as miniature radio antennæ, transmitting electromagnetic
+noise that cause interference with signals elsewhere in the
+system. For these reasons, the engineers designing PC systems try
+to keep the fastest buses confined to the smallest area of the
+motherboard they can, and use slower, more robust buses for other
+parts.</p>
+
+<h2><font size="3">Bus logic</font></h2>
+
+<p>The fastest bus of all is the connection between the processor
+and its primary cache, and this is kept within the CPU chip. The
+next level down is the host bus, which links the processor with
+the memory, both the small amount of static RAM cache and the far
+larger main banks of DRAM. This is 64 bits wide and runs at
+around 50-75MHz, depending on the speed of the CPU. The CPU
+doesn't communicate directly with the memory, but through the
+intermediary of the System Controller chip, which manages the
+host bus and bridges between it and the PCI bus.</p>
+
+<h2><font size="3">PCI versus ISA </font></h2>
+
+<p>The main performance-critical components of the PC communicate
+with each other across the PCI bus, which is half the width and
+half the speed of the host bus. The most common PCI devices are
+typically the disk and graphics controllers, which are either
+mounted directly onto the motherboard or on expansion cards in
+PCI slots. Most modern PCI chipsets include a built-in EIDE
+interface, but not graphics or SCSI controllers. Network adaptors
+are another common extra, but the high speed of PCI isn't really
+necessary for ordinary 10Mbit/s Ethernet. Also on the PCI bus is
+another bridge, this time linking the PCI bus to the ISA bus.</p>
+
+<p>Originally introduced in the IBM PC-AT in 1984, the AT bus is
+by modern standards a very slow one. Only 16 bits wide, it was
+originally rated for a maximum speed of only 8MHz, although many
+modern ISA devices can run faster than this. It's now used only
+for non-performance critical devices, such as the serial and
+parallel ports, mouse and keyboard connectors, and options such
+as sound cards.</p>
+
+<h2><font size="3">On the buses</font></h2>
+
+<p>The design of the original PC included virtually nothing on
+the motherboard itself aside from CPU, memory, and interfaces for
+the keyboard and a tape cassette unit - floppy disks were an
+expensive optional extra. Whilst the tape unit has thankfully
+long gone, the keyboard socket remains, but from the PC's point
+of view, everything else is located on one of the expansion buses
+- even though many &quot;peripherals&quot; are now part of the
+chipset.</p>
+
+<h2><font size="3">Glue and chips</font></h2>
+
+<p>Tying all this together is not a trivial task. There are three
+different buses, of different widths, running at different
+speeds. Although different manufacturer's designs vary, the
+best-known at present is Intel's &quot;Triton 2&quot; or 82430HX
+PCIset. The HX chipset comprises just two chips, the 82439HX
+System Controller or SC (which manages the host and PCI buses)
+and the 82371SB PIIX3, which manages the ISA bus and all the
+ports - also used in the Triton VX chipset. </p>
+
+<p>The SC has the greatest effect on the machine's CPU
+performance, as it manages communications between CPU and memory.
+The CPU has to be fed with data from the secondary cache as
+quickly as possible, and if the necessary data isn't already in
+the cache, the SC fetches it from main memory and loads it into
+the cache. The SC also takes care of ensuring that data written
+into cache by the CPU is &quot;flushed&quot; back into main
+memory - in the HX chipset, this can include data flowing through
+two Pentium CPUs.</p>
+
+<p>The PIIX3 chip manages the many processes involved in getting
+data into and out of RAM from the other devices in the PC. It
+provides two EIDE channels, both of which can accept two drives.
+IDE drives contain most of the controlling circuitry built into
+the hard disk itself (thus the name, &quot;Integrated Drive
+Electronics&quot;), so the PIIX' job mainly involves shifting
+data from the drives into RAM and back as fast as possible. It
+also provides two 115,200K buffered serial ports, an
+error-correcting Enhanced Parallel Port, a PS/2 mouse port, and a
+keyboard controller.</p>
+
+<p>The PIIX also supports additional connections that aren't yet
+included in many motherboards, such as a Universal Serial Bus
+connector and an infra-red port.&nbsp;</p>
+
+<h2><font size="3">USB</font></h2>
+
+<p>The Universal Serial Bus is a new standardised connector for
+attaching all the common I/O devices to a single port,
+simplifying today's multiplicity of different ports and
+connectors. If it takes off, future PCs might just have a USB
+port instead of the current 4 or 5 different ones. Onto this
+would be connected some large, powered device - like a monitor or
+printer - which would act as a hub, linking up all the smaller
+devices such as mouse, keyboard, joystick, modem etc. A similar
+but simpler system, the Apple Desktop Bus, has been a standard
+feature of the Macintosh for many years, so the concept is proven
+- but it requires support from the industry which isn't happening
+yet.</p>
+
+<h2><font size="3">ROM and CMOS RAM</font></h2>
+
+<p>There are two small blocks of memory included on all
+motherboards, which are separate from the main system memory used
+for loading and running software.</p>
+
+<h2><font size="3">ROM</font></h2>
+
+<p>The ROM contains the PC's Basic Input/Output System (BIOS).
+This comprises several separate routines, serving different
+functions. The first part runs as soon as the machine is
+powered-on. It inspects the computer to determine what hardware
+is fitted, then conducts some simple tests to check everything is
+functioning normally - a process called the Power-On Self Test
+(POST). If any of the peripherals are Plug 'n' Play devices, at
+this point the BIOS assigns their resources.</p>
+
+<p>At this point, there's an option to enter the Setup program.
+This allows the user to tell the PC what hardware is fitted, but
+with automatic self-configuring BIOSes, this is becoming less
+used.</p>
+
+<p>If all the tests are passed, the ROM tries to boot the machine
+from the first hard disk. Failing that, it will try the CD-ROM
+drive, then the floppy drive, and then give up and display a
+message that it needs a system disk.</p>
+
+<p>Once the machine has booted, the BIOS serves a different
+function: it presents to DOS a standardised API for the PC
+hardware. In the days before Windows, this was a vital function,
+but 32-bit &quot;protect mode&quot; software doesn't use the
+BIOS, so it's of less today.</p>
+
+<h2><font size="3">CMOS RAM</font></h2>
+
+<p>All PCs have a small amount of memory made from very
+lower-power-consumption CMOS (Complementary Metal Oxide Silicon)
+RAM chips, which is kept &quot;alive&quot; by a battery even when
+the PC's power is off. This is used to store the basic
+information about the PC's configuration - number and type of
+hard and floppy disk drives, how much memory and what kind, etc.
+All this used to be entered manually, but modern auto-configuring
+BIOSes do much of it for you, and in such machines, the more
+important settings are advanced options such as DRAM timings.</p>
+
+<p>The other important data kept in CMOS memory is the time and
+date, which is updated by a Real-time Clock (RTC.) The clock,
+CMOS RAM and battery are commonly all integrated into a single
+chip. The PC reads the time from the RTC when it boots up, after
+which the CPU keeps time - a common cause of system clocks
+keeping bad time. Regularly rebooting the PC causes the RTC to be
+re-read and can help them to be more accurate. </p>
+</body>
+</html>

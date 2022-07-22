@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="FORMATTER" content="Microsoft FrontPage 2.0">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Hard disk interfaces</title>
+</head>
+
+<body>
+
+<h1><font size="4">Hard disk interfaces: SCSI versus EIDE</font></h1>
+
+<p><font size="4"><em>Box-out for Hard Disk Drives Labs</em></font></p>
+
+<hr>
+
+<p>As PCs get more powerful, so the subsystems in a PC must run
+faster to keep data moving at high speed. And since all that data
+either comes from or ends up on a disk drive somewhere, the
+interface between the system bus and the disks becomes a critical
+bottleneck. In most modern systems, this interface will be one of
+two kinds &#150; EIDE or SCSI.</p>
+
+<p><b>EIDE</b></p>
+
+<p>The Enhanced Integrated Drive Electronics system was developed
+from the IDE system. As the name suggests, IDE drives have the
+main disk controller circuitry built into the drive itself; the
+drive connects straight to the system bus with no need for a
+separate controller on the bus, reducing the computer&#146;s
+cost. The specification for the interface is called the AT
+Attachment (ATA), from IBM&#146;s original PC-AT (for Advanced
+Technology), the origin of the 16-bit ISA bus. IDE refers to the
+hard disks themselves, not the interface, and non-hard disk ATA
+devices such as CD-ROM drives shouldn&#146;t be called EIDE but
+rather ATAPI (ATA Packet Interface). Enhanced IDE is a newer
+specification for hard disks bigger than 528Mb, and also covers
+dual-channel systems and non-hard disk ATAPI peripherals. The
+original ATA spec was for connecting drives to the ISA bus; EIDE
+systems usually use the newer ATA-2 or Fast ATA interface, which
+connects to a local bus instead. The latest revision is UltraATA,
+which promises to double the transfer speed again to 33MByte/s
+and adds error-checking to the interface, but current PC chipsets
+don&#146;t support it.</p>
+
+<p>The ATA specification allows for only 2 devices per interface,
+one &quot;master&quot; and one &quot;slave;&quot; although EIDE
+allows for up to 4 channels and eight devices, most PCs have only
+two channels.. However, some problems are that mixing old, slow
+devices with new, faster ones can limit that channel to the speed
+of the slower device, and that only one device per channel can be
+accessed at once.</p>
+
+<p>To read or write data from an EIDE drive, the computer
+specifies the block it requires to the drive&#146;s onboard
+controller, which reads the data and places it on the system bus,
+usually in 4KB blocks. In normal Programmed I/O operation, the
+CPU reads each block, stores it in memory, comes back for the
+next, and so on. In a fast computer, this can give transfer rates
+of up to 16.6MB/sec, but it requires a lot of work by the CPU,
+which in a multitasking system could be doing other things. Many
+drives now support DMA operation as well, where the drive takes
+over the bus (bus-mastering) and places data straight into RAM
+using direct memory access (DMA.) This is better for multitasking
+PCs as the CPU can get on with other work while data transfer
+occurs, although only in Triton HX and VX-based systems can the
+CPU use the memory or ISA buses while the PCI bus is in use.</p>
+
+<p><b>SCSI</b></p>
+
+<p>The main alternative interface for storage devices in PCs and
+many other systems is SCSI. The SCSI-1 standard was agreed in
+1986, and there have been a confusing numbers of different
+versions and variants since then - SCSI-1, SCSI-2, Fast and/or
+Wide SCSI, UltraSCSI and SCSI-3. All share a number of basic
+features. Unlike EIDE, SCSI is a separate bus, which requires an
+interface to connect it to the PC&#146;s PCI or ISA bus. This
+isn&#146;t a controller &#150; it&#146;s correctly called a <i>host
+adaptor</i>. The actual controllers are built into each SCSI
+device and also serve to connect the device to the shared SCSI
+bus. Each device is distinguished by a unique ID number from 0 to
+7; traditionally, the host adaptor is ID 7. The bus is linear,
+and the host adaptor can go anywhere &#150; at either end, or in
+the middle. There&#146;s no relationship between IDs and the
+physical position on the bus, but both ends must be terminated to
+prevent signals being reflected back along the bus. Termination
+can be either passive, by plugging a passive terminator
+(essentially a block of 136 Ohm resistors) onto the end of the
+cable, or active, which is usually set by changing a jumper or
+software setting on the devices at each ends.</p>
+
+<p>SCSI-1 is the original version, and is now obsolete. It
+defined a parallel 8-bit bus with a signalling rate of 5MHz,
+which could therefore transfer 5 Megabytes every second. It was
+intended to allow up to 8 devices &#150; the host adaptor and up
+to 7 hard disks. SCSI-1 host adaptors are very rare now, and
+there&#146;s no good reason to use them, but most SCSI-1 devices
+will work happily on a SCSI-2 system.</p>
+
+<p>SCSI-2 was a major change. It added specifications for
+attaching devices other than hard disks to a SCSI bus, such as
+CD-ROM drives, scanners, optical drives, media changers and other
+devices such as printers, Ethernet interfaces and even graphics
+adaptors. It also added two optional speed improvements &#150;
+doubling the signalling rate to 10MHz (Fast SCSI), and adding a
+second &quot;P&quot; cable to the SCSI bus, allowing 16 or 32-bit
+data transfers (Wide SCSI.) These two options can be used
+separately or combined in Fast and Wide SCSI. Wide SCSI also
+doubles the permitted number of devices to 16.</p>
+
+<p>After SCSI-2, things get confusing! SCSI-3 is a far broader
+standard than its predecessor, covering various different
+physical connections. It&#146;s best thought of as a
+communications protocol, and some manufactures misuse the term
+SCSI-3 to refer to enhanced SCSI-2 products. Relative to existing
+SCSI-2 installations, probably the most important change in
+SCSI-3 is the introduction of a single cable for Wide SCSI
+devices rather than the pair of cables in Wide SCSI-2. Another
+major improvement is SCAM (SCSI Configuration Auto-Magically.)
+SCAM allows for self-configuring SCSI devices that select their
+own ID number, rather than the manual assignment of IDs in SCSI-1
+and 2. It also allows auto-termination.</p>
+
+<p>UltraSCSI is strictly an extension of SCSI-2. It doubles the
+signalling rate again, to 20MHz, at the cost of shortening the
+overall length of the SCSI bus to 1.5M. Since most
+implementations of Wide SCSI are 16-bit, Wide UltraSCSI is the
+fastest version for now, at a theoretical maximum of 40MB/sec.</p>
+
+<p>&nbsp;</p>
+
+<table border="1" cellpadding="7" cellspacing="1" width="472">
+    <tr>
+        <td valign="top" width="30%"><i>SCSI version</i></td>
+        <td valign="top" width="18%"><i>Signalling rate (MHz)</i></td>
+        <td valign="top" width="20%"><i>Bus width (bits)</i></td>
+        <td valign="top" width="32%"><i>Maximum data transfer
+        rate (Mb/s)</i></td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">SCSI 1</td>
+        <td valign="top" width="18%">5</td>
+        <td valign="top" width="20%">8</td>
+        <td valign="top" width="32%">5</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">SCSI 2</td>
+        <td valign="top" width="18%">5</td>
+        <td valign="top" width="20%">8</td>
+        <td valign="top" width="32%">5</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">Wide SCSI</td>
+        <td valign="top" width="18%">5</td>
+        <td valign="top" width="20%">16</td>
+        <td valign="top" width="32%">10</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">Fast SCSI</td>
+        <td valign="top" width="18%">10</td>
+        <td valign="top" width="20%">8</td>
+        <td valign="top" width="32%">10</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">Fast &amp; Wide SCSI</td>
+        <td valign="top" width="18%">10</td>
+        <td valign="top" width="20%">16</td>
+        <td valign="top" width="32%">20</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">UltraSCSI</td>
+        <td valign="top" width="18%">20</td>
+        <td valign="top" width="20%">8</td>
+        <td valign="top" width="32%">20</td>
+    </tr>
+    <tr>
+        <td valign="top" width="30%">Wide UltraSCSI</td>
+        <td valign="top" width="18%">20</td>
+        <td valign="top" width="20%">16</td>
+        <td valign="top" width="32%">40</td>
+    </tr>
+</table>
+
+<p><b>Which is better?</b></p>
+
+<p>Both SCSI and EIDE have distinct advantages. EIDE is cheap and
+fairly easy, with only one setting &#150; master/slave &#150; to
+worry about, but only allows 4 devices, mainly limited top hard
+disks and CD-ROMs. SCSI allows up to 15 devices on one interface,
+and in a multitasking system, several can be accessed at once,
+but it costs more and can getting IDs and termination set up
+correctly can be tricky.</p>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>A brief guide to Unix</title>
+</head>
+
+<body>
+<i><b>
+
+<h2>A brief guide to Unix</b></i><font FACE="Courier New"></h2>
+
+<p></font>The Unix shell is powerful, difficult and different, and you'll need to use it a
+lot. To get you going, here's a short introduction to the essential commands and
+procudures.</p>
+<i>
+
+<p>Important differences</i>
+
+<ol>
+  <li>Forward slashes - &#145;<font FACE="Courier New">/</font>&#146; &#150; separate
+    directories, instead of DOS' backslashes - &#145;<font FACE="Courier New">\</font>&#146;.</li>
+  <li>File and directory names are <i>case-sensitive</i> - the files <font FACE="Courier New">readme</font>,<font
+    FACE="Courier New"> README</font> and <font FACE="Courier New">ReadMe</font> are different
+    and could exist in the same directory together.</li>
+  <li>File extensions <i>are </i>used, but not universally, as native Unix files contain an
+    internal &quot;magic number&quot; that tells the OS what type they are. You'll mainly find
+    them on things like HTML files, or documents created by programs ported from other OSs.</li>
+  <li>There are no drive letters. All filesystems, whether in different partitions or
+    removable discs, appear as part of one big directory tree. There's an official layout for
+    this, the <a href="http://www.pathname.com/fhs"><i>Filesystem Hierarchy Standard</i></a>.
+    Some of the main directories are as follows:</li>
+</ol>
+<div align="left">
+
+<table border="0">
+  <tr>
+    <td><i>Name</i><font FACE="Courier-WP">&nbsp; </font></td>
+    <td><font face="Courier-WP"></font><i>Function</i><font face="Courier-WP"></font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/</font></td>
+    <td><font face="Courier-WP"></font>Root directory<font face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/bin, /sbin</font><font FACE="Courier-WP"> </font></td>
+    <td><font face="Courier-WP"></font>Binaries required for system startup and administration<font
+    face="Courier-WP"></font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/dev</font></td>
+    <td><font FACE="Courier-WP"></font>Devices (such as drives, partitions, I/O ports)<font
+    face="Courier-WP"></font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/etc, /var</font></td>
+    <td><font face="Courier-WP"></font>Configuration files<font face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/mnt</font></td>
+    <td><font face="Courier-WP"></font>Mount point for temporary filesystems<font
+    face="Courier-WP"></font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/usr</font></td>
+    <td><font face="Courier-WP"></font>User files (such as system components, manuals, source
+    code)<font face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/lib, /usr/lib</font></td>
+    <td><font face="Courier-WP"></font>Shared libraries (similar to DLLs under Windows)<font
+    face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/tmp</font></td>
+    <td><font FACE="Courier-WP"></font>Temporary files<font face="Courier-WP"></font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/opt</font></td>
+    <td><font face="Courier-WP"></font>Optional components (such as 3rd-party applications)<font
+    face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/home</font></td>
+    <td><font face="Courier-WP"></font>User home directories<font face="Courier-WP"> </font></td>
+  </tr>
+  <tr>
+    <td><font FACE="Courier New">/root</font></td>
+    <td><font face="Courier-WP"></font>Superuser's home directory<font face="Courier-WP"> </font></td>
+  </tr>
+</table>
+</div>
+
+<p>Broadly, you should install applications into /opt and keep data files in your home
+directory, and not change anything anywhere else. If you're upgrading a component, or have
+to edit a configuration file, always make a copy of the original first.</p>
+<i>
+
+<p>Essential commands</i></p>
+
+<p>Terseness is part of the design ethos of Unix. Commands are abbreviated, and often only
+give any output if there's an error. Command switches are preceded by a dash, not a slash
+as in DOS. Like DOS, Ctrl-c stops a command running.</p>
+<font FACE="Courier New">
+
+<p>man &lt;subject&gt;<br>
+info &lt;subject&gt;</p>
+</font>
+
+<p>The most important command, and the equivalent of HELP under DOS. The standard Unix <font
+FACE="Courier New">man</font> command is often over-technical and rather uninformative, so
+you should use the GNU equivalent, <font FACE="Courier New">info</font>, which contains a
+lot of additional documentation. Start by studying <font FACE="Courier New">info info</font>.
+I. If info doesn't help, look for a HOWTO. You should find some preloaded in /usr/doc, or
+you can get the originals from <a href="http://metalab.unc.edu/LDP/HOWTO/HOWTO-INDEX.html">Metalab</a>
+or a local mirror. Other documentation can be found at the <a
+href="http://metalab.unc.edu/LDP/">Linux Documentation Project</a> and at the Linux
+Journal's <a href="http://www.linuxresources.com">Linux Resources page</a>.</p>
+<font FACE="Courier New">
+
+<p>ls</font></p>
+
+<p>List the files in a directory. Try adding <font FACE="Courier New">-l </font>(long
+listing), <font FACE="Courier New">-a</font> (shows hidden files, whose names begin with a
+full stop) and <font FACE="Courier New">-R</font> (lists subdirectories - note the
+capital!)</p>
+<font FACE="Courier New">
+
+<p>cd</font></p>
+
+<p>Change directory. Works like DOS, except that <font FACE="Courier New">cd</font> on its
+own goes to the user's home directory.</p>
+<font FACE="Courier New">
+
+<p>pwd</font></p>
+
+<p>Print working (current) directory.</p>
+<font FACE="Courier New">
+
+<p>cp</font></p>
+
+<p>Copy files. Use <font FACE="Courier New">-R </font>(not <font FACE="Courier New">-r</font>)
+to copy subdirectories as well. </p>
+<font FACE="Courier New">
+
+<p>rm</font></p>
+
+<p>Remove (delete) files. Take care, there's no recycle bin or undelete command! The
+command <font FACE="Courier New">rm -r </font>removes subdirectories and contents too, so
+use with extreme caution - for instance, typing <font FACE="Courier New">rm -r *</font>
+when logged in as root and in the root directory would wipe all files on all disks!</p>
+<font FACE="Courier New">
+
+<p>mv</font> </p>
+
+<p>Move or rename files and directories. </p>
+<font FACE="Courier New">
+
+<p>mkdir</font></p>
+
+<p>Make directory.</p>
+<font FACE="Courier New">
+
+<p>rmdir &lt;dirname&gt;</font></p>
+
+<p>Remove directory.</p>
+
+<p>Finally, two complex commands often used to install software.</p>
+<font FACE="Courier New">
+
+<p>tar &lt;options&gt; &lt;archive&gt;</p>
+
+<p>gunzip &lt;archive&gt;</font></p>
+
+<p>Tar adds and removes files in archives, which usually have the extension <font
+FACE="Courier New">.tar</font>. It's similar to PKZIP under DOS, except that tar doesn't
+compress the data, so it's usually used with the GNU compressor <font FACE="Courier New">gzip</font>,
+yielding a `.<font FACE="Courier New">tar.gz</font>' extension. This combination is a
+common way to bundle up programs for distribution, and the resulting <font
+FACE="Courier New">.tar.gz</font> file is known as a &quot;tarball&quot;.</p>
+
+<p>To extract the files, first uncompress the tarball, then use tar to extract the
+contents. First, make a copy to work on. Then, unzip it:</p>
+
+<p><font FACE="Courier New"># gunzip &lt;tarballname&gt;.tar.gz</font></p>
+
+<p>The <font FACE="Courier New">gunzip</font> command will happily uncompress its own <font
+FACE="Courier New">.gz</font> files, plus those from PKZip, WinZip and the Unix <font
+FACE="Courier New">pack</font> and <font FACE="Courier New">compress </font>commands. Note
+that it removes the original archive after uncompressing it.</p>
+
+<p>Then, extract the files from the archive:</p>
+
+<p><font FACE="Courier New"># tar -xvf &lt;tarballname&gt;.tar</font> </p>
+
+<p>This unpacks all the files and directories in the archive into the current directory,
+reproducing the directory structure and listing them as it goes.</p>
+<font FACE="Courier New">
+
+<p>mount &lt;device&gt; &lt;directory&gt;</p>
+
+<p></font>Insert a filesystem (say, a partition, a CD or a floppy disk) into the directory
+tree. The contents of the filesystem replace the contents (if any) of the directory.</p>
+<font FACE="Courier New">
+
+<p>logout</font></p>
+
+<p>(Or Ctrl-d) terminates the current shell.</p>
+</body>
+</html>
